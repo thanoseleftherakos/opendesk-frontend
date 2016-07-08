@@ -1,4 +1,4 @@
-# react-webpack-babel-kit
+# react-webpack-babel-sass
 
 A simple hello world using react, webpack, babel, es2015 & sass.
 
@@ -31,5 +31,3 @@ To use webpack dev server & watch,
 ```
 
 Listens at **http://localhost:8080**
-
-https://github.com/srinisoundar/react-webpack-babel-kit
