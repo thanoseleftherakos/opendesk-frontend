@@ -1,23 +1,12 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var DEBUG = process.env.NODE_ENV !== 'production' ? true : false;
-var styles = 'css!sass?sourceMap';
-
-function getDevTool() {
-    if (process.env.NODE_ENV !== 'production') {
-        return 'source-map'; //enables source map
-    }
-
-    return false;
-}
+var path = require('path');
 
 module.exports = {
     entry: {
-        main: './src/scripts/main.js'
+        main: './src/main.js'
     },
     output: {
-        filename: './dist/scripts/[name].js'
+        filename: './dist/main.min.js'
     },
-    devtool: getDevTool(),
     module: {
         loaders: [
             {
@@ -34,16 +23,10 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
-                // loader: 'style!css!sass?sourceMap',
-                // loader: ExtractTextPlugin.extract('css!sass')
-                loader: DEBUG ? 'style!' + styles : ExtractTextPlugin.extract(styles)
+              test: /\.s?css$/,
+              loaders: ['style','css','sass'],
+              include:path.join(__dirname,'src')
             }
         ]
-    },
-    plugins: [
-        new ExtractTextPlugin('dist/styles/main.css', {
-            allChunks: true
-        })
-    ]
+    }
 };
