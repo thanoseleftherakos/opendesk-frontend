@@ -1,4 +1,4 @@
-# react-webpack-babel-sass
+# React Hotel Reservation App
 
 A simple hello world using react, webpack, babel, es2015 & sass.
 
