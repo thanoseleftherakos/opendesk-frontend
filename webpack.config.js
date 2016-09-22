@@ -7,19 +7,18 @@ module.exports = {
     output: {
         filename: './dist/main.min.js'
     },
+    devServer: {
+        historyApiFallback: true
+    },
     module: {
         loaders: [
+            
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'react-hot'
-            },
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: 'babel',
+                loader: ['babel-loader'],
                 query: {
-                    presets: ['react', 'es2015']
+                    presets: ['react', 'es2015','stage-1']
                 }
             },
             {

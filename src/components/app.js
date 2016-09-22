@@ -11,6 +11,7 @@ export default class App extends Component {
     		<div className="clearfix"> </div>
     		<div className="page-container">
     			<Menu />
+                {this.props.children}
     			<div className="page-content-wrapper">
 	                <div className="page-content">
 	                    <h3 className="page-title"> Blank Page Layout
