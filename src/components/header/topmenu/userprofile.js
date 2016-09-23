@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-
+import { connect } from 'react-redux';
+import * as actions from '../../../actions'
 
 class UserProfile extends Component {
 	render() {
@@ -37,7 +38,7 @@ class UserProfile extends Component {
                             <i className="icon-lock"></i> Lock Screen </a>
                     </li>
                     <li>
-                        <a href="page_user_login_1.html">
+                        <a href="#" onClick={() => this.props.logoutUser()} >
                             <i className="icon-key"></i> Log Out </a>
                     </li>
                 </ul>
@@ -45,5 +46,8 @@ class UserProfile extends Component {
 		);
 	}
 }
+function mapStateToProps(state) {
+    return { authenticated: state.auth.authenticated };
+}
 
-export default UserProfile;
+export default connect(mapStateToProps, actions)(UserProfile);
