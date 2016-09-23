@@ -16,13 +16,32 @@ export function loginUser({ email, password }) {
 
 			browserHistory.push('/');
 		})
-		.catch(()=> {
+		.catch(error => {
 
-			dispatch(authError('Bad login info')); //to be changed!!!!!
+				dispatch(authError(error.response.data)); 
 
 		});
 
 
+	}
+
+}
+
+export function signupUser(formData) { 
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/auth/signup`, formData)
+			.then( response => {
+				dispatch({ type: AUTH_USER });
+
+				localStorage.setItem('token',response.data.token);
+
+				browserHistory.push('/');
+			})
+			.catch(error => {
+
+				dispatch(authError(error.response.data.message)); 
+
+			});
 	}
 
 }
@@ -40,3 +59,5 @@ export function authError(error) {
 		payload: error
 	};
 }
+
+

@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
-import { reduxForm} from 'redux-form';
+import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
 class SignupForm extends Component {
-    handleFormSubmit(){
-
+    handleFormSubmit(formProps){
+        this.props.signupUser(formProps);
+    }
+    renderAlert() {
+        if (this.props.errorMessage) {
+            return (
+                <div>{this.props.errorMessage}</div>
+            );
+        }
     }
 
 	render() {
@@ -53,6 +60,7 @@ class SignupForm extends Component {
                     </label>
                     <div id="register_tnc_error"> </div>
                 </div>
+                {this.renderAlert()} asdf
                 <div className="form-actions">
                     <button type="button" id="register-back-btn" className="btn btn-default">Back</button>
                     <button type="submit" id="register-submit-btn" className="btn btn-success uppercase pull-right">Submit</button>
@@ -89,10 +97,14 @@ function validate(formProps) {
     return errors;
 }
 
+function mapStateToProps(state) {
+    return { errorMessage: state.auth.error };
+}
+
 export default reduxForm ({
 
     form: 'signup',
     fields: ['name', 'email', 'total_rooms', 'username', 'password', 'rpassword'],
     validate
 
-})(SignupForm);
+}, mapStateToProps, actions)(SignupForm);
