@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 
 class Menu extends Component {
@@ -6,7 +6,7 @@ class Menu extends Component {
 		return (
 			<div className="page-sidebar-wrapper">
                 <div className="page-sidebar navbar-collapse collapse">
-                    <ul className="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <ul className="page-sidebar-menu  page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         <li className="sidebar-toggler-wrapper hide">
                             <div className="sidebar-toggler"> </div>
                         </li>
@@ -41,7 +41,7 @@ class Menu extends Component {
                                     </a>
                                 </li>
                                 <li className="nav-item  ">
-                                    <a href="layout_classNameic_page_head.html" className="nav-link ">
+                                    <a href="layout_classNameic_page_head.html" className="nav-link">
                                         <span className="title">ClassNameic Page Head</span>
                                     </a>
                                 </li>

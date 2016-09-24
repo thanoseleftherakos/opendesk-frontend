@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
 class SignupForm extends Component {
-    handleFormSubmit(formProps){
+    handleFormSubmit(formProps) {
         this.props.signupUser(formProps);
     }
     renderAlert() {
@@ -15,13 +15,13 @@ class SignupForm extends Component {
     }
 
 	render() {
-        const { handleSubmit, fields: { email, password, name, total_rooms, username, rpassword }} = this.props;
+        const { handleSubmit, fields: { email, password, name, total_rooms, username, rpassword } } = this.props;
 
 		return (
             <form className="register-form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                 <h3 className="font-green">Sign Up</h3>
                 <p className="hint"> Enter hotel details below: </p>
-                <div className={"form-group " + (name.error ? 'has-error' : '')}>
+                <div className={'form-group ' + (name.error ? 'has-error' : '')}>
                     <label className="control-label visible-ie8 visible-ie9">Hotel name</label>
                     <input className="form-control placeholder-no-fix" type="text" placeholder="Hotel Name" {...name} /> 
                     {name.touched && name.error && <span className="help-block">{name.error}</span>}
@@ -75,23 +75,23 @@ function validate(formProps) {
     const errors = {};
 
     if (formProps.password !== formProps.rpassword) {
-        errors.rpassword = "Passwords must match!";
+        errors.rpassword = 'Passwords must match!';
     }
-    if(!formProps.name) {
-        errors.name = "Required";
+    if (!formProps.name) {
+        errors.name = 'Required';
     }
-    if(!formProps.username) {
-        errors.username = "Required";
+    if (!formProps.username) {
+        errors.username = 'Required';
     }
     if (!formProps.email) {
-        errors.email = 'Required'
+        errors.email = 'Required';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formProps.email)) {
-        errors.email = 'Invalid email address'
+        errors.email = 'Invalid email address';
     }
     if (!formProps.total_rooms) {
-        errors.total_rooms = 'Required'
+        errors.total_rooms = 'Required';
     } else if (isNaN(Number(formProps.total_rooms))) {
-        errors.total_rooms = 'Must be a number'
+        errors.total_rooms = 'Must be a number';
     }
 
     return errors;
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
     return { errorMessage: state.auth.error };
 }
 
-export default reduxForm ({
+export default reduxForm({
 
     form: 'signup',
     fields: ['name', 'email', 'total_rooms', 'username', 'password', 'rpassword'],

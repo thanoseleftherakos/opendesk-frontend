@@ -8,7 +8,7 @@ class Header extends Component{
 	            <div className="page-header-inner ">
 	                <div className="page-logo">
 	                    <a href="index.html">
-	                        <img src="src/theme/layouts/layout/img/logo.png" alt="logo" className="logo-default" /> </a>
+	                        <img src="" alt="logo" className="logo-default" /> </a>
 	                    <div className="menu-toggler sidebar-toggler"> </div>
 	                </div>
 	                <a href="javascript:;" className="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>

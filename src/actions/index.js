@@ -1,49 +1,42 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_DASHBOARD } from './types';
 
 const ROOT_URL = 'http://dev.webf8.net/hotelapi/public';
 
 
 export function loginUser({ email, password }) {
-	return function(dispatch) {
+	return function (dispatch) {
 		//Submit to server
 		axios.post(`${ROOT_URL}/auth/login`, { email, password })
-		.then( response => {
+		.then(response => {
 			dispatch({ type: AUTH_USER });
 
-			localStorage.setItem('token',response.data.token);
+			localStorage.setItem('token', response.data.token);
 
 			browserHistory.push('/');
 		})
 		.catch(error => {
-
-				dispatch(authError(error.response.data)); 
-
+			dispatch(authError(error.response.data)); 
 		});
-
-
-	}
-
+	};
 }
 
 export function signupUser(formData) { 
-	return function(dispatch) {
+	return function (dispatch) {
 		axios.post(`${ROOT_URL}/auth/signup`, formData)
-			.then( response => {
+			.then(response => {
+
 				dispatch({ type: AUTH_USER });
 
-				localStorage.setItem('token',response.data.token);
+				localStorage.setItem('token', response.data.token);
 
 				browserHistory.push('/');
 			})
 			.catch(error => {
-
 				dispatch(authError(error.response.data.message)); 
-
 			});
-	}
-
+	};
 }
 
 export function logoutUser() {
@@ -61,3 +54,17 @@ export function authError(error) {
 }
 
 
+export function fetchDashboard() {
+	return function (dispatch) {
+		axios.get(`${ROOT_URL}/hotelinfo`, {
+			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+		})
+		.then(response => {
+		
+			dispatch({ 
+				type: FETCH_DASHBOARD,
+				payload: response.data.data
+			});
+		});
+	};
+}

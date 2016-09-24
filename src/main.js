@@ -2,15 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import {Route, Router, IndexRoute, browserHistory} from 'react-router';
+import { Route, Router, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 import { AUTH_USER } from './actions/types';
 
 import requiereAuth from './components/require_auth';
 import App from './components/app';
 import Login from './components/login/login';
-import SignUp from './components/signup';
-import Dashboard from './components/dashboard';
+import Dashboard from './components/dashboard/';
 import reducers from './reducers';
 
 
@@ -27,13 +26,11 @@ if (token) {
 
 ReactDOM.render(
   <Provider store={store}>
-  	<Router history={browserHistory}>
-  		<Route path="/" component={requiereAuth(App)}>
-  			<Route path="dashboard" component={Dashboard} />
-  		</Route>
-  		
-  		<Route path="/login" component={Login} />
-  		<Route path="/signup" component={SignUp} />
-  	</Router>
+    <Router history={browserHistory}>
+      <Route path="/" component={requiereAuth(App)}>
+        <Route path="dashboard" component={Dashboard} />
+      </Route>
+      <Route path="/login" component={Login} />
+    </Router>
   </Provider>
   , document.getElementById('appContainer'));
