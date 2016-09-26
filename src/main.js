@@ -10,6 +10,8 @@ import requiereAuth from './components/require_auth';
 import App from './components/app';
 import Login from './components/login/login';
 import Dashboard from './components/dashboard/';
+import SingleReservation from './components/reservations/single';
+import EditReservation from './components/reservations/edit';
 import reducers from './reducers';
 
 
@@ -29,6 +31,9 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={requiereAuth(App)}>
         <Route path="dashboard" component={Dashboard} />
+        <Route path="reservations" component={Dashboard} />
+        <Route path="reservations/:id" component={SingleReservation} />
+        <Route path="reservations/edit/:id" component={EditReservation} />
       </Route>
       <Route path="/login" component={Login} />
     </Router>

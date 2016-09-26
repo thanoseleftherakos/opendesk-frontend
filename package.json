@@ -9,6 +9,7 @@
     "babel-preset-stage-1": "^6.13.0",
     "keymirror": "^0.1.1",
     "lodash": "^4.16.1",
+    "moment": "^2.15.1",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
     "react-hot-loader": "^3.0.0-beta.5",

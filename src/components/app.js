@@ -21,7 +21,9 @@ class App extends Component {
                 <div className="clearfix"></div>
                 <div className="page-container">
                     <Menu />
-                    {this.props.children}
+                    <div className="page-content-wrapper">
+                        {this.props.children}
+                    </div>
                 </div>
                 <Footer />
             </div>
