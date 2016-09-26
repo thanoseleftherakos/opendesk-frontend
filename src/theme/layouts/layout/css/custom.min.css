@@ -1,0 +1,17 @@
+.form-group.form-md-line-input label {
+    top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #888;
+        width: auto;
+    position: absolute;
+     
+    bottom: 0;
+    pointer-events: none;
+}
+.left{
+	
+}
+.page-title .label{
+	margin-left: 10px;
+}

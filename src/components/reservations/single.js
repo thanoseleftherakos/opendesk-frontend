@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 import { connect } from 'react-redux';
 import { fetchReservation } from '../../actions';
 import moment from "moment";
@@ -25,7 +26,7 @@ class SingleReservation extends Component {
                     		{this.props.reservation.nights} nights | 
                     		{this.props.reservation.total_price} €
                     </small>
-                    <span className={'label label-sm label-' + (this.props.reservation.status_type.type ? 'success' : 'danger')}>
+                    <span className={'label label-sm label-' + (this.props.reservation.status_type.type==1 ? 'success' : 'danger')}>
                  		{this.props.reservation.status_type.type}
                  	</span> 
                 </h3>
@@ -39,9 +40,9 @@ class SingleReservation extends Component {
                                     <span className="caption-subject font-green bold uppercase">{this.props.reservation.room.name}</span>
                                 </div>
                                 <div className="actions">
-                                    <a className="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                    <Link to={`/reservations/edit/${this.props.reservation.id}`} className="btn btn-circle btn-icon-only btn-default">
                                         <i className="icon-wrench"></i>
-                                    </a>
+                                    </Link>
                                     <a className="btn btn-circle btn-icon-only btn-default" href="javascript:;">
                                         <i className="icon-trash"></i>
                                     </a>

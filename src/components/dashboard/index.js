@@ -25,17 +25,17 @@ class Dashboard extends Component {
                         <small> dashboard & statistics</small>
                     </h3>
                     <div className="row">
-                        <DashboardStat name="Arrivals Today" value={this.props.dashboard.arivals_today_count} color="green" icon="fa-shopping-cart" />
-                        <DashboardStat name="Departures Today" value={this.props.dashboard.departures_today_count} color="purple" icon="fa-globe" />
-                        <DashboardStat name="Total Reservations" value={this.props.dashboard.total_reservations} color="blue" icon="fa-comments" />
-                        <DashboardStat name="Total Profit" value={this.props.dashboard.total_earnings} color="red" icon="fa-bar-chart-o" />
+                        <DashboardStat key="1" name="Arrivals Today" value={this.props.dashboard.arivals_today_count} color="green" icon="fa-shopping-cart" />
+                        <DashboardStat key="2" name="Departures Today" value={this.props.dashboard.departures_today_count} color="purple" icon="fa-globe" />
+                        <DashboardStat key="3" name="Total Reservations" value={this.props.dashboard.total_reservations} color="blue" icon="fa-comments" />
+                        <DashboardStat key="4" name="Total Profit" value={this.props.dashboard.total_earnings} color="red" icon="fa-bar-chart-o" />
                     </div>
                     <div className="row">
                         <div className="col-md-6 col-sm-6">
                             <Portlet name="ARRIVALS TODAY" key="1" data={this.props.dashboard.arivals_today}/>
                         </div>
                         <div className="col-md-6 col-sm-6">
-                            <Portlet name="DEPARTURES TODAY" key="jhgkjhgjkhg2" data={this.props.dashboard.departures_today}/>
+                            <Portlet name="DEPARTURES TODAY" key="2" data={this.props.dashboard.departures_today}/>
                         </div>
                     </div>
                     <div className="clearfix"></div>

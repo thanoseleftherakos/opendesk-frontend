@@ -3,7 +3,9 @@ import {
 	UNAUTH_USER,
 	AUTH_ERROR,
 	FETCH_DASHBOARD,
-	FETCH_RESERVATION
+	FETCH_RESERVATION,
+	REQUEST_SUCCESS,
+	REQUEST_ERROR
 } from '../actions/types';
 
 export default function (state = {}, action) {
@@ -18,6 +20,10 @@ export default function (state = {}, action) {
 			return { ...state, dashboard: action.payload.data };
 		case FETCH_RESERVATION:
 			return { ...state, reservation: action.payload.data };
+		case REQUEST_ERROR:
+			return { ...state, error: action.payload };
+		case REQUEST_SUCCESS:
+			return { ...state, success: action.payload.data };
 	}
 
 	return state;

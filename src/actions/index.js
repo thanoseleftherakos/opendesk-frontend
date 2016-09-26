@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_DASHBOARD, FETCH_RESERVATION } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_DASHBOARD, FETCH_RESERVATION, REQUEST_ERROR, REQUEST_SUCCESS } from './types';
 
 const ROOT_URL = 'http://dev.webf8.net/hotelapi/public';
 
@@ -53,6 +53,18 @@ export function authError(error) {
 	};
 }
 
+export function requestError(error) {
+	return {
+		type: REQUEST_ERROR,
+		payload: error
+	};
+}
+export function requestSuccess(message) {
+	return {
+		type: REQUEST_SUCCESS,
+		payload: message
+	};
+}
 
 export function fetchDashboard() {
 	return function (dispatch) {
@@ -90,4 +102,25 @@ export function fetchReservation(id) {
 		});
 	};
 
+}
+
+export function editReservation(formData,id) { 
+	return function (dispatch) {
+		formData._method = 'PUT';
+		axios.post(`${ROOT_URL}/reservations/${id}`, formData ,{
+			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+		})
+		.then(response => {
+			dispatch(requestSuccess(response.data)); 
+
+		})
+		.catch(error => {
+			if(error.response.data.code == 422) { //validation
+				dispatch(requestError("Please fill all the required fields")); 	
+			}
+			else{
+				dispatch(requestError("Unable to update, please try again later")); 	
+			}
+		});
+	};
 }
