@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 import Alert from '../UI/alerts';
 import DatePicker from 'react-datepicker';
 import moment from "moment";
+import Loader from './../UI/loader';
 
 require('style!css!sass!react-datepicker/dist/react-datepicker.css'); 
 
@@ -49,9 +50,8 @@ class EditReservation extends Component {
 
 	render(){
 		if(!this.props.reservation) {
-			return <div>loading....</div>
+			return <Loader />
 		}
-        console.log(this.props.reservation);
 		const { handleSubmit, fields: { client_name, client_phone, client_email, check_in, check_out, deposit, deposit_amount, nights, persons, price, breakfast, channel_id, room_type_id, status_id } } = this.props;
 
 		return (
@@ -61,7 +61,7 @@ class EditReservation extends Component {
                     		{this.props.reservation.nights} nights | 
                     		{this.props.reservation.total_price} € 
                     </small>
-                    <span className={'label label-sm label-' + (this.props.reservation.status_type.type==1 ? 'success' : 'danger')}>
+                    <span className={'label label-sm label-' + (this.props.reservation.status_type.id==1 ? 'success' : 'danger')}>
                  		{this.props.reservation.status_type.type}
                  	</span> 
                 </h3>

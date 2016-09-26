@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchReservation } from '../../actions';
 import moment from "moment";
 import locale_el from "moment/locale/el";
+import Loader from './../UI/loader';
 
 class SingleReservation extends Component {
 	componentWillMount(){
@@ -17,7 +18,7 @@ class SingleReservation extends Component {
 
 	render() {
 		if(!this.props.reservation) {
-			return <div>loading....</div>
+			return <Loader />
 		}
 		return (
 			<div className="page-content">

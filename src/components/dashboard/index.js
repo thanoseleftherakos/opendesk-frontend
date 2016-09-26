@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import DashboardStat from './dashboard_stat';
 import Portlet from './portlet/';
-
+import Loader from './../UI/loader';
 
 class Dashboard extends Component {
     componentWillMount() {
@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
 	render() {
         if(!this.props.dashboard) {
-            return <div>loading.....</div>
+            return <Loader />
         }
         
 		return (
@@ -32,10 +32,10 @@ class Dashboard extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-6 col-sm-6">
-                            <Portlet name="ARRIVALS TODAY" key="1" data={this.props.dashboard.arivals_today}/>
+                            <Portlet name="ARRIVALS TODAY" key="5" data={this.props.dashboard.arivals_today}/>
                         </div>
                         <div className="col-md-6 col-sm-6">
-                            <Portlet name="DEPARTURES TODAY" key="2" data={this.props.dashboard.departures_today}/>
+                            <Portlet name="DEPARTURES TODAY" key="6" data={this.props.dashboard.departures_today}/>
                         </div>
                     </div>
                     <div className="clearfix"></div>

@@ -3,18 +3,17 @@ import Header from './header/header';
 import Menu from './sidebar/menu';
 import Footer from './footer/footer';
 import { connect } from 'react-redux';
-
-// import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 
 class App extends Component {
-    renderLinks() {
-        if (this.props.authenticated) {
-            return <span>(authenticated)</span>;
-        }
-        return <span>(not authenticated)</span>;
+    componentWillMount() {
+        if(this.props.location.pathname == "/") {
+            browserHistory.push('/dashboard');
+        }     
     }
-
+   
     render() {
+        
         return (
             <div>
                 <Header />
