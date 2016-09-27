@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
-import { fetchReservation } from '../../actions';
+import * as actions from '../../actions';
 import moment from "moment";
 import locale_el from "moment/locale/el";
 import Loader from './../UI/loader';
@@ -15,6 +15,9 @@ class SingleReservation extends Component {
 		var new_date = moment(date).format("LL");
 		return new_date;
 	}
+    removeReservation(){
+        this.props.removeReservation(this.props.params.id);
+    }
 
 	render() {
 		if(!this.props.reservation) {
@@ -42,9 +45,9 @@ class SingleReservation extends Component {
                                 </div>
                                 <div className="actions">
                                     <Link to={`/reservations/edit/${this.props.reservation.id}`} className="btn btn-circle btn-icon-only btn-default">
-                                        <i className="icon-wrench"></i>
+                                        <i className="icon-pencil"></i>
                                     </Link>
-                                    <a className="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                    <a className="btn btn-circle btn-icon-only btn-default" href="javascript:;" onClick={this.removeReservation.bind(this)}>
                                         <i className="icon-trash"></i>
                                     </a>
                                 </div>
@@ -97,7 +100,7 @@ class SingleReservation extends Component {
                                             <tr>
                                                 <td> Breakfast </td>
                                                 <td>
-                                                	<span className={'label label-sm label-' + (this.props.reservation.breakfast ? 'success' : 'danger')}>
+                                                	<span className={'label label-sm label-' + (this.props.reservation.breakfast ? 'success ' : 'danger')}>
                                                  		{(this.props.reservation.breakfast ? 'YES' : 'NO')}
                                                  	</span> 
                                                  </td> 
@@ -130,7 +133,7 @@ class SingleReservation extends Component {
                                                 <td> Status </td>
                                                 <td>
                                                 	<span className={'label label-sm label-' + (this.props.reservation.status_type.type ? 'success' : 'danger')}>
-                                                 		{this.props.reservation.status_type.type}
+                                                 		{this.props.reservation.status_type.type}  <i className={'icon-' + (this.props.reservation.status_type.type ? 'check' : 'close')} ></i>
                                                  	</span> 
                                                  </td> 
                                             </tr>
@@ -155,4 +158,4 @@ function mapStateToProps(state) {
 	return {reservation: state.auth.reservation};
 }
 
-export default connect(mapStateToProps, { fetchReservation })(SingleReservation);
+export default connect(mapStateToProps, actions)(SingleReservation);

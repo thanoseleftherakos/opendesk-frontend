@@ -7,9 +7,9 @@ import { browserHistory } from 'react-router';
 
 class App extends Component {
     componentWillMount() {
-        if(this.props.location.pathname == "/") {
-            browserHistory.push('/dashboard');
-        }     
+        // if(this.props.location.pathname == "/") {
+        //     browserHistory.push('/dashboard');
+        // }     
     }
    
     render() {

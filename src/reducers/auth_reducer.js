@@ -5,7 +5,10 @@ import {
 	FETCH_DASHBOARD,
 	FETCH_RESERVATION,
 	REQUEST_SUCCESS,
-	REQUEST_ERROR
+	REQUEST_ERROR,
+	FETCH_RESERVATION_FORM_PARAMS,
+	FETCH_RESERVATIONS,
+	REMOVE_RESERVATION
 } from '../actions/types';
 
 export default function (state = {}, action) {
@@ -23,7 +26,13 @@ export default function (state = {}, action) {
 		case REQUEST_ERROR:
 			return { ...state, error: action.payload };
 		case REQUEST_SUCCESS:
-			return { ...state, success: action.payload.data };
+			return { ...state, error: '', success: action.payload.data };
+		case FETCH_RESERVATION_FORM_PARAMS:
+			return { ...state, reservationformparams: action.payload.data };
+		case FETCH_RESERVATIONS:
+			return { ...state, reservations: action.payload };
+		case REMOVE_RESERVATION:
+			return { ...state, error:'' ,success: action.payload.data };
 	}
 
 	return state;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import Alert from '../UI/alerts';
+import DatePicker from 'react-datepicker';
 import moment from "moment";
 import Loader from './../UI/loader';
 import TextInput from './../UI/forms/textinput';
@@ -13,16 +14,17 @@ import Textarea from './../UI/forms/textarea';
 
 require('style!css!sass!react-datepicker/dist/react-datepicker.css'); 
 
-class EditReservation extends Component {
+class CreateReservation extends Component {
 	componentWillMount(){
-		this.props.fetchReservation(this.props.params.id);
+		this.props.fetchReservationFormParams();
+        
 	}
 	componentDidUpdate(){
         App.init();
         Layout.init();
     }
     handleFormSubmit(formProps) {
-        this.props.editReservation(formProps,this.props.params.id);
+        this.props.createReservation(formProps);
     }
     renderAlert() {
         if (this.props.errorMessage) {
@@ -50,14 +52,7 @@ class EditReservation extends Component {
 		const { handleSubmit, fields: { client_name, client_phone, client_email, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes } } = this.props;
 		return (
 			<div className="page-content">
-                <h3 className="page-title">EDIT: {this.props.reservation.client_name}
-                    <small> {this.props.reservation.room.name} | 
-                    		{this.props.reservation.nights} nights | 
-                    		{this.props.reservation.total_price} € 
-                    </small>
-                    <span className={'label label-sm label-' + (this.props.reservation.status_type.id==1 ? 'success' : 'danger')}>
-                 		{this.props.reservation.status_type.type}
-                 	</span> 
+                <h3 className="page-title"> NEW RESERVATION
                 </h3>
                 
                 <div className="row">
@@ -66,7 +61,7 @@ class EditReservation extends Component {
                             <div className="portlet-title">
                                 <div className="caption font-green">
                                     <i className="icon-settings font-green"></i>
-                                    <span className="caption-subject bold uppercase"> Edit Reservation</span>
+                                    <span className="caption-subject bold uppercase"> Create</span>
                                 </div>
                             </div>
                             <div className="portlet-body form">
@@ -75,18 +70,8 @@ class EditReservation extends Component {
                                         <TextInput type="text" name="Name" data={client_name} />
                                         <TextInput type="email" name="Email" data={client_email} />
                                         <TextInput type="text" name="Phone" data={client_phone} />
-                                        <DatePickerField 
-                                            name="Check In" 
-                                            startDate={moment(check_in.value)} 
-                                            endDate={moment(check_out.value)} 
-                                            selected={moment(check_in.value)} 
-                                            data={check_in}/>
-                                        <DatePickerField 
-                                            name="Check Out" 
-                                            startDate={moment(check_in.value)} 
-                                            endDate={moment(check_out.value)} 
-                                            selected={moment(check_out.value)}
-                                            data={check_out}/>
+                                        <DatePickerField name="Check In" startDate={moment()} endDate={moment()}  selected={moment()} data={check_in}/>
+                                        <DatePickerField name="Check Out" startDate={moment()} endDate={moment()} selected={moment()} data={check_out}/>
                                         <div className="clearfix"></div>
                                         <SelectOption name="Room Type" data={room_type_id} options={this.props.reservation.room_types} />
                                         <SelectOption name="Persons" data={persons} options={personsArr} />
@@ -122,8 +107,7 @@ class EditReservation extends Component {
 
 function mapStateToProps(state) {
 	return {
-		reservation: state.auth.reservation,
-		initialValues: state.auth.reservation,
+		reservation: state.auth.reservationformparams,
 		successMessage: state.auth.success,
         errorMessage: state.auth.error
 	};
@@ -139,21 +123,43 @@ function validate(formProps) {
     if (!formProps.client_name) {
         errors.client_name = 'Please enter a name';
     }
-
-    if (!formProps.client_email) {
-        errors.client_email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formProps.client_email)) {
-        errors.client_email = 'Invalid email address';
+    if (!formProps.check_in) {
+        errors.check_in = 'Please enter a check in date';
     }
+    if (!formProps.check_out) {
+        errors.check_out = 'Please enter a check out date';
+    }
+
+    if (!formProps.room_type_id) {
+        errors.room_type_id = 'Please select a room type';
+    }
+
+    if (!formProps.persons) {
+        errors.persons = 'Please select the number of persons';
+    }
+
+    if (!formProps.price) {
+        errors.price = 'Please give a price for the room';
+    }
+
+    if (!formProps.channel_id) {
+        errors.channel_id = 'Please select a channel';
+    }
+
+    if (!formProps.status_id) {
+        errors.status_id = 'Please select a room status';
+    }
+    
+
 
     return errors;
 }
 
 export default reduxForm({
 
-    form: 'edit_reservation',
+    form: 'create_reservation',
     fields: ['client_name', 'client_email', 'client_phone', 'check_in', 'check_out', 'deposit', 'deposit_amount', 'persons', 'price', 'breakfast', 'channel_id', 'room_type_id', 'status_id', 'notes'],
     validate
 
-}, mapStateToProps, actions)(EditReservation);
+}, mapStateToProps, actions)(CreateReservation);
 

@@ -10,8 +10,19 @@
     pointer-events: none;
 }
 .left{
-	
+	float:left;
 }
 .page-title .label{
 	margin-left: 10px;
+}
+ .form-group.has-error .help-block-error {
+    opacity: 1;
+ }
+
+ .form-group.form-md-line-input {
+    margin: 0 0 20px;
+}
+.btn-xs {
+    font-size: 15px;
+    padding: 3px 3px
 }
