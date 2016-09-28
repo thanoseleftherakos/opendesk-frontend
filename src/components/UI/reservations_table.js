@@ -30,7 +30,7 @@ class ReservationsTable extends Component {
 			            <thead className="flip-content">
 			                <tr>
 			                    <th width="2%"> # </th>
-			                    <th width="13%"> Reservation Date </th>
+			                    <th width="9%"> Reserv. Date </th>
 			                    <th> Client Name </th>
 			                    <th> Check In </th>
 			                    <th> Check Out </th>
