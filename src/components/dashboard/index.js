@@ -4,6 +4,7 @@ import * as actions from '../../actions';
 import DashboardStat from './dashboard_stat';
 import Portlet from './portlet/';
 import Loader from './../UI/loader';
+import ReservationsTable from './../UI/reservations_table';
 
 class Dashboard extends Component {
     componentWillMount() {
@@ -25,6 +26,7 @@ class Dashboard extends Component {
                         <small> dashboard & statistics</small>
                     </h3>
                     <div className="row">
+                        <DashboardStat key="1" name="Free Rooms Today" value={this.props.dashboard.available_rooms_today} color="green" icon="fa-shopping-cart" />
                         <DashboardStat key="1" name="Arrivals Today" value={this.props.dashboard.arivals_today_count} color="green" icon="fa-shopping-cart" />
                         <DashboardStat key="2" name="Departures Today" value={this.props.dashboard.departures_today_count} color="purple" icon="fa-globe" />
                         <DashboardStat key="3" name="Total Reservations" value={this.props.dashboard.total_reservations} color="blue" icon="fa-comments" />
@@ -38,13 +40,20 @@ class Dashboard extends Component {
                             <Portlet name="DEPARTURES TODAY" key="6" data={this.props.dashboard.departures_today}/>
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <ReservationsTable reservations={ this.props.dashboard.current_rooms } title="Current rooms"/>
+                        </div>
+                    </div>
                     <div className="clearfix"></div>
                 </div>
 		);
 	}
 }
 function mapStateToProps(state) {
-    return { dashboard: state.auth.dashboard };
+    return { dashboard: state.auth.dashboard,
+             loading: state.auth.loading
+             };
 }
 
 export default connect(mapStateToProps, actions)(Dashboard);

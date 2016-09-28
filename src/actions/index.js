@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_DASHBOARD, FETCH_RESERVATION, REQUEST_ERROR, REQUEST_SUCCESS, FETCH_RESERVATION_FORM_PARAMS, FETCH_RESERVATIONS, REMOVE_RESERVATION } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_DASHBOARD, FETCH_RESERVATION, REQUEST_ERROR, REQUEST_SUCCESS, FETCH_RESERVATION_FORM_PARAMS, FETCH_RESERVATIONS, REMOVE_RESERVATION, LOADING } from './types';
 
 const ROOT_URL = 'http://dev.webf8.net/hotelapi/public';
 
@@ -78,8 +78,11 @@ export function fetchDashboard() {
 			});
 		})
 		.catch(error => {
-			localStorage.removeItem('token');
-			browserHistory.push('/');
+			if(error.response.status == 401) {
+				localStorage.removeItem('token');
+				browserHistory.push('/login');	
+			}
+			
 		});
 	};
 }
@@ -97,8 +100,10 @@ export function fetchReservation(id) {
 			});
 		})
 		.catch(error => {
-			localStorage.removeItem('token');
-			browserHistory.push('/');
+			if(error.response.status == 401) {
+				localStorage.removeItem('token');
+				browserHistory.push('/login');	
+			}
 		});
 	};
 
@@ -115,6 +120,10 @@ export function editReservation(formData,id) {
 
 		})
 		.catch(error => {
+			if(error.response.status == 401) {
+				localStorage.removeItem('token');
+				browserHistory.push('/login');	
+			}
 			if(error.response.data.code == 422) { //validation
 				dispatch(requestError("Please fill all the required fields")); 	
 			}
@@ -134,6 +143,10 @@ export function createReservation(formData,id) {
 
 		})
 		.catch(error => {
+			if(error.response.status == 401) {
+				localStorage.removeItem('token');
+				browserHistory.push('/login');	
+			}
 			if(error.response.data.code == 422) { //validation
 				dispatch(requestError("Please fill all the required fields")); 	
 			}
@@ -185,10 +198,12 @@ export function fetchReservationFormParams() {
 
 export function fetchReservations(formData) {
 	return function(dispatch) {
+		dispatch({ type: LOADING, payload: true });
 		axios.post(`${ROOT_URL}/reservations/search`, formData ,{
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 		})
 		.then(response => {
+			dispatch({ type: LOADING, payload: false });
 			dispatch({ 
 				type: FETCH_RESERVATIONS,
 				payload: response.data

@@ -9,3 +9,4 @@ export const REQUEST_SUCCESS = 'request_success';
 export const FETCH_RESERVATION_FORM_PARAMS = 'request_reservation_form_params';
 export const FETCH_RESERVATIONS = 'request_reservations';
 export const REMOVE_RESERVATION = 'remove_reservation';
+export const LOADING = 'loading';

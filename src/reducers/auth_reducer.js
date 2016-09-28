@@ -8,7 +8,8 @@ import {
 	REQUEST_ERROR,
 	FETCH_RESERVATION_FORM_PARAMS,
 	FETCH_RESERVATIONS,
-	REMOVE_RESERVATION
+	REMOVE_RESERVATION,
+	LOADING
 } from '../actions/types';
 
 export default function (state = {}, action) {
@@ -20,9 +21,9 @@ export default function (state = {}, action) {
 		case AUTH_ERROR:
 			return { ...state, error: action.payload };
 		case FETCH_DASHBOARD:
-			return { ...state, dashboard: action.payload.data };
+			return { ...state, dashboard: action.payload.data, loading: false };
 		case FETCH_RESERVATION:
-			return { ...state, reservation: action.payload.data };
+			return { ...state, reservation: action.payload.data, loading: false };
 		case REQUEST_ERROR:
 			return { ...state, error: action.payload };
 		case REQUEST_SUCCESS:
@@ -30,9 +31,11 @@ export default function (state = {}, action) {
 		case FETCH_RESERVATION_FORM_PARAMS:
 			return { ...state, reservationformparams: action.payload.data };
 		case FETCH_RESERVATIONS:
-			return { ...state, reservations: action.payload };
+			return { ...state, reservations: action.payload, loading: false };
 		case REMOVE_RESERVATION:
-			return { ...state, error:'' ,success: action.payload.data };
+			return { ...state, error:'' ,success: action.payload.data, loading: false };
+		case LOADING:
+			return { ...state, loading: action.payload };
 	}
 
 	return state;

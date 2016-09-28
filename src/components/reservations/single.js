@@ -129,6 +129,12 @@ class SingleReservation extends Component {
                                                 <td> Channel </td>
                                                 <td> {this.props.reservation.channel.name} </td>
                                             </tr>
+                                            {this.props.reservation.ref_id &&
+                                                <tr>
+                                                    <td> Ref.id </td>
+                                                    <td> {this.props.reservation.ref_id} </td>
+                                                </tr>
+                                            }
                                             <tr>
                                                 <td> Status </td>
                                                 <td>

@@ -47,7 +47,7 @@ class EditReservation extends Component {
 			return <Loader />
 		}
         const personsArr  = [ { id : "1", name : "1" }, { id : "2", name : "2" }, { id : "3", name : "3" }, { id : "4", name : "4" } ];
-		const { handleSubmit, fields: { client_name, client_phone, client_email, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes } } = this.props;
+		const { handleSubmit, fields: { client_name, client_phone, client_email, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes, ref_id } } = this.props;
 		return (
 			<div className="page-content">
                 <h3 className="page-title">EDIT: {this.props.reservation.client_name}
@@ -96,7 +96,10 @@ class EditReservation extends Component {
                                         {deposit.value &&
                                             <TextInput type="number" name="Deposit Amount" data={deposit_amount} />
                                         }
-                                        <SelectOption name="Channel" data={channel_id} options={this.props.reservation.channels} />                                        
+                                        <SelectOption name="Channel" data={channel_id} options={this.props.reservation.channels} />   
+                                        {(channel_id.value!=4 && channel_id.value!=5) &&
+                                            <TextInput type="text" name="Ref.id" data={ref_id} />                                     
+                                        }
                                         <div className="form-group form-md-line-input">
                                             <select className="form-control" {...status_id}>
                                                 <option value="">Select</option>
@@ -152,7 +155,7 @@ function validate(formProps) {
 export default reduxForm({
 
     form: 'edit_reservation',
-    fields: ['client_name', 'client_email', 'client_phone', 'check_in', 'check_out', 'deposit', 'deposit_amount', 'persons', 'price', 'breakfast', 'channel_id', 'room_type_id', 'status_id', 'notes'],
+    fields: ['client_name', 'client_email', 'client_phone', 'check_in', 'check_out', 'deposit', 'deposit_amount', 'persons', 'price', 'breakfast', 'channel_id', 'room_type_id', 'status_id', 'notes', 'ref_id'],
     validate
 
 }, mapStateToProps, actions)(EditReservation);

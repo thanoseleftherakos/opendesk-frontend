@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { fetchReservations } from '../../actions';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 import TextInput from './../UI/forms/textinput';
+import SelectOption from './../UI/forms/selectoption';
 import DatePickerField from './../UI/forms/datepicker';
 import * as actions from '../../actions';
 import moment from "moment";
 import Loader from './../UI/loader';
 import Alert from '../UI/alerts';
+import ReservationsTable from './../UI/reservations_table';
 
 class Reservations extends Component { 
     
-    componentDidMount(){
+    componentWillMount(){
         if(!this.props.reservations){
             this.fetchData();
         }
+    }
+    componentDidUpdate(){
+        App.init();
+        Layout.init();
     }
 	handleFormSubmit(formProps) {
         this.props.fetchReservations(formProps);
@@ -32,50 +37,16 @@ class Reservations extends Component {
             );   
         }
     }
-    removeReservation(id){
-        this.props.removeReservation(id);
-    }
-
-    renderResults(){
-    	return this.props.reservations.map((data, index) => (
-            <tr key={index}>
-                <td> { index+1 } </td>
-                <td> { data.created_at } </td>
-                <td> 
-                	<Link to={`/reservations/${data.id}`} >
-                		{ data.client_name } 
-                	</Link>
-                </td>
-                <td> { moment(data.check_in).format('dddd DD MMMM YY') } </td>
-                <td> { moment(data.check_out).format('dddd DD MMMM YY') } </td>
-                <td> { data.status_type.type } </td>
-                <td className="numeric"> { data.price } </td>
-                <td> { data.room.name } </td>
-                <td> { data.channel.name } </td>
-                <td> 
-                	<Link to={`/reservations/${data.id}`} className="btn btn-xs blue">
-                		<i className="icon-eye"></i> 
-                	</Link>
-                  
-                	<Link to={`/reservations/edit/${data.id}`} className="btn btn-xs yellow-crusta">
-                		<i className="icon-pencil"></i> 
-                	</Link>
-                	<a href="javascript:;" className="btn btn-xs red" onClick={this.removeReservation.bind(this,data.id)}>
-                		<i className="icon-trash"></i> 
-                	</a>
-                </td>
-            </tr>
-         ));
-    }
 
     fetchData(formProps) {
     	this.props.fetchReservations(formProps);
     }
 
 	render() {
-		const { handleSubmit, fields: { query, check_in, check_out } } = this.props;
+		const { handleSubmit, fields: { query, stay_from, stay_to, type } } = this.props;
+        const typesArr  = [ { id : "rs_date", name : "Reservation Date" }, { id : "arr_date", name : "Arrival Date" }, { id : "dp_date", name : "Departure Date" } ];
 		if(!this.props.reservations) {
-			return <Loader />
+			return <Loader /> 
 		}
 		return(
 			<div className="page-content">
@@ -86,58 +57,31 @@ class Reservations extends Component {
                             <div className="filters-container">
 								<form role="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 									<TextInput name="Search" placeholder="Enter your search criteria" data={query} />
+                                    <SelectOption name="Type" data={type} options={typesArr} />
 									<DatePickerField 
                                             name="From" 
-                                            startDate={moment(check_in.value)} 
-                                            endDate={moment(check_out.value)} 
-                                            selected={moment(check_in.value)} 
-                                            data={check_in}/>
+                                            startDate={moment(stay_from.value)} 
+                                            endDate={moment(stay_to.value)} 
+                                            selected={moment(stay_from.value)} 
+                                            data={stay_from}/>
                                         <DatePickerField 
                                             name="To" 
-                                            startDate={moment(check_in.value)} 
-                                            endDate={moment(check_out.value)} 
-                                            selected={moment(check_out.value)}
-                                            data={check_out}/>
+                                            startDate={moment(stay_from.value)} 
+                                            endDate={moment(stay_to.value)} 
+                                            selected={moment(stay_to.value)}
+                                            data={stay_to}/>
 									<div className="clearfix"></div>
 									<button type="submit" className="btn btn-success">Search</button>
 								</form>
                             </div>
                         </div>	
-                        {this.renderAlert()}
-						<div className="portlet box green">
-                                <div className="portlet-title">
-                                    <div className="caption">
-                                        <i className="fa fa-calendar"></i>Results</div>
-                                    <div className="tools">
-                                        <a href="javascript:;" className="collapse" data-original-title="" title=""> </a>
-                                        <a href="javascript:;" className="reload" data-original-title="" title="" onClick={this.fetchData.bind(this)}> </a>
-                                    </div>
-                                </div>
-                                <div className="portlet-body flip-scroll">
-                                    <table className="table table-bordered table-striped table-condensed flip-content">
-                                        <thead className="flip-content">
-                                            <tr>
-                                                <th width="2%"> # </th>
-                                                <th width="13%"> Reservation Date </th>
-                                                <th> Client Name </th>
-                                                <th> Check In </th>
-                                                <th> Check Out </th>
-                                                <th> Status </th>
-                                                <th className="numeric"> Price </th>
-                                                <th> Room Type </th>
-                                                <th> Channel </th>
-                                                <th> Actions </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        	{this.renderResults()}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>                
+                        <ReservationsTable reservations={ this.props.reservations } title="Results" />
+                        {this.renderAlert()}               
 	               		</div>
                 </div>
-                	
+                {this.props.loading &&
+                    <Loader />
+                }
             </div>
 		);
 	}
@@ -148,7 +92,8 @@ function mapStateToProps(state) {
 	return {
 		reservations: state.auth.reservations,
         successMessage: state.auth.success,
-        errorMessage: state.auth.error
+        errorMessage: state.auth.error,
+        loading: state.auth.loading
 	};
 }
 
@@ -156,11 +101,12 @@ function mapStateToProps(state) {
 export default reduxForm({
 
     form: 'edit_reservation',
-    fields: ['query', 'check_in', 'check_out'],
+    fields: ['query', 'stay_from', 'stay_to', 'type'],
     initialValues: {
-        check_in: moment(),
-        check_out: moment().add(1, 'days'),
-        query: ''
+        stay_from: moment().format('YYYY/MM/DD'),
+        stay_to: moment().add(1, 'days').format('YYYY/MM/DD'),
+        query: '',
+        type: 'arr_date'
     }
 
 }, mapStateToProps, actions)(Reservations);
