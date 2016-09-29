@@ -8,7 +8,8 @@ import ReservationsTable from './../UI/reservations_table';
 
 class Dashboard extends Component {
     componentWillMount() {
-        this.props.fetchDashboard();      
+        this.props.fetchDashboard();     
+
     }
     componentDidUpdate(){
         App.init();
@@ -19,7 +20,7 @@ class Dashboard extends Component {
         if(!this.props.dashboard) {
             return <Loader />
         }
-        
+        console.log(this.props.dashboard); 
 		return (
                 <div className="page-content">
                     <h3 className="page-title">{this.props.dashboard.hotel.name} 
@@ -34,10 +35,10 @@ class Dashboard extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-6 col-sm-6">
-                            <Portlet name="ARRIVALS TODAY" key="5" data={this.props.dashboard.arivals_today}/>
+                            <Portlet name="ARRIVALS" key="a" tab1={this.props.dashboard.arivals_today} tab2={this.props.dashboard.arivals_tomorrow} />
                         </div>
                         <div className="col-md-6 col-sm-6">
-                            <Portlet name="DEPARTURES TODAY" key="6" data={this.props.dashboard.departures_today}/>
+                            <Portlet name="DEPARTURES" key="6" tab1={this.props.dashboard.departures_today} tab2={this.props.dashboard.departures_tomorrow} />
                         </div>
                     </div>
                     <div className="row">
