@@ -5,6 +5,8 @@ import DashboardStat from './dashboard_stat';
 import Portlet from './portlet/';
 import Loader from './../UI/loader';
 import ReservationsTable from './../UI/reservations_table';
+import ReactHighcharts from 'react-highcharts';
+import Chart from './../UI/chart';
 
 class Dashboard extends Component {
     componentWillMount() {
@@ -20,7 +22,6 @@ class Dashboard extends Component {
         if(!this.props.dashboard) {
             return <Loader />
         }
-        console.log(this.props.dashboard); 
 		return (
                 <div className="page-content">
                     <h3 className="page-title">{this.props.dashboard.hotel.name} 
@@ -46,6 +47,12 @@ class Dashboard extends Component {
                             <ReservationsTable reservations={ this.props.dashboard.current_rooms } title="Current rooms"/>
                         </div>
                     </div>
+                     <div className="row">
+                        <div className="col-md-12">
+                            <Chart config={this.props.dashboard.chart} />
+                        </div>
+                    </div>
+                    
                     <div className="clearfix"></div>
                 </div>
 		);
