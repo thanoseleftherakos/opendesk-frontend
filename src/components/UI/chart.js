@@ -11,15 +11,17 @@ class Chart extends Component {
 	renderChart(){
 		var props = this.props.config;
 		var reservations = [];
-		props.map((data, index) => (
-            reservations.push(data.total)
-        ));
+    var categories = [];
+		props.map((data, index) => {
+            reservations.push(data.sum);
+            categories.push(data.day);
+        });
 		var config = {
             title: {
                 text: 'Hotel Reservations'
             },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: categories
           },
           yAxis: {
             title: {
