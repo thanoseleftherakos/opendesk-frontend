@@ -1,7 +1,7 @@
 module.exports = [
     {
-        "name": "Greece",
-        "code": "GR"
+        "name": "",
+        "code": ""
     },
     {
         "name": "Afghanistan",

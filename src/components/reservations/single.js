@@ -30,9 +30,9 @@ class SingleReservation extends Component {
                     		{this.props.reservation.nights} nights | 
                     		{this.props.reservation.total_price} €
                     </small>
-                    <span className={'label label-sm label-' + (this.props.reservation.status_type.type==1 ? 'success' : 'danger')}>
-                 		{this.props.reservation.status_type.type}
-                 	</span> 
+                    <span className={'label label-sm label-' + (this.props.reservation.status_type.id==1 ? 'success' : 'danger')}>
+                        {this.props.reservation.status_type.type}
+                    </span> 
                 </h3>
                 <div className="row">
 					<div className="col-md-12">
@@ -67,6 +67,10 @@ class SingleReservation extends Component {
                                             <tr>
                                                 <td> Client Phone </td>
                                                 <td> {this.props.reservation.client_phone} </td>
+                                            </tr>
+                                            <tr>
+                                                <td> Country </td>
+                                                <td> {this.props.reservation.country} </td>
                                             </tr>
                                             <tr>
                                                 <td> Check-in </td>
@@ -113,10 +117,12 @@ class SingleReservation extends Component {
                                                  	</span> 
                                                  </td> 
                                             </tr>
+                                            {this.props.reservation.deposit &&
                                             <tr>
                                                 <td> Deposit Amount </td>
                                                 <td> {this.props.reservation.deposit_amount} € </td>
                                             </tr>
+                                            }
                                             <tr>
                                                 <td> Price per night </td>
                                                 <td> {this.props.reservation.price} €</td>

@@ -7,6 +7,7 @@ import Loader from './../UI/loader';
 import ReservationsTable from './../UI/reservations_table';
 import ReactHighcharts from 'react-highcharts';
 import Chart from './../UI/chart';
+import moment from "moment";
 
 class Dashboard extends Component {
     componentWillMount() {
@@ -49,7 +50,7 @@ class Dashboard extends Component {
                     </div>
                      <div className="row">
                         <div className="col-md-12">
-                            <Chart config={this.props.dashboard.chart} />
+                            <Chart config={this.props.dashboard.chart} chartTitle={moment().format('MMMM')} yaxis="Rooms" />
                         </div>
                     </div>
                     

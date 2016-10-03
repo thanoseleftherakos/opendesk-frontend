@@ -18,23 +18,23 @@ class Chart extends Component {
         });
 		var config = {
             title: {
-                text: 'Hotel Reservations'
+                text: this.props.chartTitle
             },
           xAxis: {
             categories: categories
           },
           yAxis: {
             title: {
-                text: 'Reservations'
+                text: this.props.yaxis
             },
             plotLines: [{
                 value: 0,
-                width: 1,
+                width: 2,
                 color: '#808080'
             }]
            },
           series: [{
-            name: 'Reservations',
+            name: this.props.yaxis,
             data: reservations
           }]
         };
