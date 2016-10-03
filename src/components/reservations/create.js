@@ -11,6 +11,7 @@ import DatePickerField from './../UI/forms/datepicker';
 import SelectOption from './../UI/forms/selectoption';
 import CheckBox from './../UI/forms/checkbox';
 import Textarea from './../UI/forms/textarea';
+import countries from '../../data/countries';
 
 require('style!css!sass!react-datepicker/dist/react-datepicker.css'); 
 
@@ -49,7 +50,7 @@ class CreateReservation extends Component {
 			return <Loader />
 		}
         const personsArr  = [ { id : "1", name : "1" }, { id : "2", name : "2" }, { id : "3", name : "3" }, { id : "4", name : "4" } ];
-		const { handleSubmit, fields: { client_name, client_phone, client_email, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes, ref_id } } = this.props;
+		const { handleSubmit, fields: { client_name, client_phone, client_email, country, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes, ref_id } } = this.props;
 		return (
 			<div className="page-content">
                 <h3 className="page-title"> NEW RESERVATION
@@ -70,6 +71,7 @@ class CreateReservation extends Component {
                                         <TextInput type="text" name="Name" data={client_name} />
                                         <TextInput type="email" name="Email" data={client_email} />
                                         <TextInput type="text" name="Phone" data={client_phone} />
+                                        <SelectOption name="Country" data={country} options={countries} />
                                         <DatePickerField 
                                             name="Check In" 
                                             startDate={moment()} 
@@ -175,7 +177,7 @@ function validate(formProps) {
 export default reduxForm({
 
     form: 'create_reservation',
-    fields: ['client_name', 'client_email', 'client_phone', 'check_in', 'check_out', 'deposit', 'deposit_amount', 'persons', 'price', 'breakfast', 'channel_id', 'room_type_id', 'status_id', 'notes', 'ref_id'],
+    fields: ['client_name', 'client_email', 'client_phone', 'country', 'check_in', 'check_out', 'deposit', 'deposit_amount', 'persons', 'price', 'breakfast', 'channel_id', 'room_type_id', 'status_id', 'notes', 'ref_id'],
     validate
 
 }, mapStateToProps, actions)(CreateReservation);
