@@ -70,8 +70,18 @@ class CreateReservation extends Component {
                                         <TextInput type="text" name="Name" data={client_name} />
                                         <TextInput type="email" name="Email" data={client_email} />
                                         <TextInput type="text" name="Phone" data={client_phone} />
-                                        <DatePickerField name="Check In" startDate={moment()} endDate={moment()}  selected={moment()} data={check_in}/>
-                                        <DatePickerField name="Check Out" startDate={moment()} endDate={moment()} selected={moment()} data={check_out}/>
+                                        <DatePickerField 
+                                            name="Check In" 
+                                            startDate={moment()} 
+                                            endDate={moment()}  
+                                            selected={moment(check_in.value)} 
+                                            data={check_in}/>
+                                        <DatePickerField 
+                                            name="Check Out" 
+                                            startDate={moment()} 
+                                            endDate={moment()} 
+                                            selected={moment(check_out.value)}
+                                            data={check_out}/>
                                         <div className="clearfix"></div>
                                         <SelectOption name="Room Type" data={room_type_id} options={this.props.reservation.room_types} />
                                         <SelectOption name="Persons" data={persons} options={personsArr} />
@@ -112,7 +122,11 @@ function mapStateToProps(state) {
 	return {
 		reservation: state.auth.reservationformparams,
 		successMessage: state.auth.success,
-        errorMessage: state.auth.error
+        errorMessage: state.auth.error,
+        initialValues: {
+            check_in : moment().format('YYYY/MM/DD'),
+            check_out : moment().format('YYYY/MM/DD')
+        }
 	};
 }
 
