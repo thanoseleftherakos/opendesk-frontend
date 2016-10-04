@@ -84,9 +84,10 @@ export function removeReservation(id) {
 		.then(response => {
 			dispatch({ 
 				type: REMOVE_RESERVATION,
-				payload: response.data
+				payload: response.data,
+				id
 			});
-			browserHistory.push('/reservations');
+			browserHistory.push('/hotel/reservations');
 
 		})
 		.catch(error => {

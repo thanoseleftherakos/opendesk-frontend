@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReservationsTableRow from './reservations_table_row';
-import * as actions from '../../actions';
+import * as actions from '../../actions/reservationsActions';
+import { I18n } from 'react-redux-i18n';
 
 class ReservationsTable extends Component {
 
@@ -30,15 +31,15 @@ class ReservationsTable extends Component {
 			            <thead className="flip-content">
 			                <tr>
 			                    <th width="2%"> # </th>
-			                    <th width="9%"> Reserv. Date </th>
-			                    <th> Client Name </th>
-			                    <th> Check In </th>
-			                    <th> Check Out </th>
-			                    <th> Status </th>
-			                    <th className="numeric"> Price </th>
-			                    <th> Room Type </th>
-			                    <th> Channel </th>
-			                    <th> Actions </th>
+			                    <th width="9%"> {I18n.t('general.resvdate')} </th>
+			                    <th> {I18n.t('general.client_name')} </th>
+			                    <th> {I18n.t('general.check_in')} </th>
+			                    <th> {I18n.t('general.check_out')} </th>
+			                    <th> {I18n.t('general.status')} </th>
+			                    <th className="numeric"> {I18n.t('general.price')} </th>
+			                    <th> {I18n.t('general.room_type')} </th>
+			                    <th> {I18n.t('general.channel')} </th>
+			                    <th> {I18n.t('general.actions')} </th>
 			                </tr>
 			            </thead>
 			            <tbody>

@@ -4,7 +4,7 @@ class SelectOption extends Component {
 
 	renderOptions(){
         return this.props.options.map((data, index) => (
-                <option key={data.id} value={data.id}>{data.name}</option>
+                <option key={data.name} value={data.id}>{data.name}</option>
             ));
     }
 

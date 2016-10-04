@@ -9,6 +9,8 @@ import ReactHighcharts from 'react-highcharts';
 import Chart from './../UI/chart';
 import moment from "moment";
 
+import { I18n } from 'react-redux-i18n';
+
 class Dashboard extends Component {
     componentWillMount() {
         this.props.fetchDashboard();    
@@ -32,18 +34,17 @@ class Dashboard extends Component {
                         <small> dashboard & statistics</small>
                     </h3>
                     <div className="row">
-                        <DashboardStat key="1" name="Free Rooms Today" value={this.props.dashboard.available_rooms_today} color="green" icon="fa-shopping-cart" />
-                        <DashboardStat key="1" name="Arrivals Today" value={this.props.dashboard.arivals_today_count} color="green" icon="fa-shopping-cart" />
-                        <DashboardStat key="2" name="Departures Today" value={this.props.dashboard.departures_today_count} color="purple" icon="fa-globe" />
-                        <DashboardStat key="3" name="Total Reservations" value={this.props.dashboard.total_reservations} color="blue" icon="fa-comments" />
-                        <DashboardStat key="4" name="Total Profit" value={this.props.dashboard.total_earnings} color="red" icon="fa-bar-chart-o" />
+                        <DashboardStat key="dash1" name={I18n.t('dashboard.stats.freerooms')} value={this.props.dashboard.available_rooms_today} color="green" icon="fa-shopping-cart" />
+                        <DashboardStat key="dash2" name={I18n.t('dashboard.stats.departures')} value={this.props.dashboard.departures_today_count} color="purple" icon="fa-globe" />
+                        <DashboardStat key="dash3" name={I18n.t('dashboard.stats.totalR')} value={this.props.dashboard.total_reservations} color="blue" icon="fa-comments" />
+                        <DashboardStat key="dash4" name={I18n.t('dashboard.stats.totalP')} value={this.props.dashboard.total_earnings} color="red" icon="fa-bar-chart-o" />
                     </div>
                     <div className="row">
                         <div className="col-md-6 col-sm-6">
-                            <Portlet name="ARRIVALS" key="a" tab1={this.props.dashboard.arivals_today} tab2={this.props.dashboard.arivals_tomorrow} />
+                            <Portlet name={I18n.t('general.arrivals')} key="adfasdf" tab1={this.props.dashboard.arivals_today} tab2={this.props.dashboard.arivals_tomorrow} />
                         </div>
                         <div className="col-md-6 col-sm-6">
-                            <Portlet name="DEPARTURES" key="6" tab1={this.props.dashboard.departures_today} tab2={this.props.dashboard.departures_tomorrow} />
+                            <Portlet name={I18n.t('general.departures')} key="6asdfsadf" tab1={this.props.dashboard.departures_today} tab2={this.props.dashboard.departures_tomorrow} />
                         </div>
                     </div>
                     <div className="row">

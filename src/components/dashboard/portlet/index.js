@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PortletItem from './item';
+import { I18n } from 'react-redux-i18n';
 var _ = require('lodash');
 
 class Portlet extends Component {
@@ -7,10 +8,10 @@ class Portlet extends Component {
 	renderItemsTab(props){
 		if(!_.isEmpty(props)){
 			return props.map((data, index) => (
-            	<PortletItem key={index} id={data.id} title={data.client_name} details={data.room.name + ' | ' + data.nights + ' nights'} />
+            	<PortletItem key={index} id={data.id} title={data.client_name} details={data.room.name + ' | ' + data.nights + ' ' + I18n.t('general.nights', {count: data.nights})} />
         	));
 		}  else {
-			return [<small>YOU DON'T HAVE ANY {this.props.name}</small>];
+			return [<small>{I18n.t('general.noarrivals', {name: this.props.name, count: 1})}</small>]; 
 		}
 	}
 
@@ -24,10 +25,10 @@ class Portlet extends Component {
 	                </div>
 	                <ul className="nav nav-tabs">
                         <li className="active">
-                            <a href={"#tab_1_1_" + this.props.name} data-toggle="tab" aria-expanded="false"> TODAY </a>
+                            <a href={"#tab_1_1_" + this.props.name} data-toggle="tab" aria-expanded="false"> {I18n.t('general.today')} </a>
                         </li>
                         <li className="">
-                            <a href={"#tab_1_2_" + this.props.name } data-toggle="tab" aria-expanded="true"> TOMORROW </a>
+                            <a href={"#tab_1_2_" + this.props.name } data-toggle="tab" aria-expanded="true"> {I18n.t('general.tomorrow')} </a>
                         </li>
                     </ul>
 	            </div>
