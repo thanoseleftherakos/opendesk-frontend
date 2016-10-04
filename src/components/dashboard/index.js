@@ -11,8 +11,11 @@ import moment from "moment";
 
 class Dashboard extends Component {
     componentWillMount() {
-        this.props.fetchDashboard();     
+        this.props.fetchDashboard();    
 
+    }
+    componentDidMount(){
+        document.title = "Dashboard";
     }
     componentDidUpdate(){
         App.init();

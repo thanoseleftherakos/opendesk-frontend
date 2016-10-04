@@ -10,7 +10,7 @@ class ReservationsTableRow extends Component {
             <td> { this.props.index+1 } </td>
             <td> { moment(this.props.data.created_at).format('DD/MM/YYYY') } </td>
             <td> 
-            	<Link to={`/reservations/${this.props.data.id}`} >
+            	<Link to={`/hotel/reservations/${this.props.data.id}`} >
             		{ this.props.data.client_name } 
             	</Link>
             </td>
@@ -21,11 +21,11 @@ class ReservationsTableRow extends Component {
             <td> { this.props.data.room.name } </td>
             <td> { this.props.data.channel.name } </td>
             <td> 
-            	<Link to={`/reservations/${this.props.data.id}`} className="btn btn-xs blue">
+            	<Link to={`/hotel/reservations/${this.props.data.id}`} className="btn btn-xs blue">
             		<i className="icon-eye"></i> 
             	</Link>
               
-            	<Link to={`/reservations/edit/${this.props.data.id}`} className="btn btn-xs yellow-crusta">
+            	<Link to={`/hotel/reservations/edit/${this.props.data.id}`} className="btn btn-xs yellow-crusta">
             		<i className="icon-pencil"></i> 
             	</Link>
             	<a href="javascript:;" className="btn btn-xs red" onClick={this.props.removeReservation}>

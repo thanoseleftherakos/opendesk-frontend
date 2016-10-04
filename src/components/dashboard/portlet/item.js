@@ -6,7 +6,7 @@ class PortletItem extends Component {
 	render(){
 		return (
 			<li>
-			    <Link to={'reservations/' + this.props.id}>
+			    <Link to={'/hotel/reservations/' + this.props.id}>
 				    <div className="col1">
 				        <div className="cont">
 				            <div className="cont-col1">
