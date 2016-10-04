@@ -90,7 +90,7 @@ class Reservations extends Component {
 
 function mapStateToProps(state) {
 	return {
-		reservations: state.auth.reservations,
+		reservations: state.reservations.reservations,
         successMessage: state.auth.success,
         errorMessage: state.auth.error,
         loading: state.auth.loading

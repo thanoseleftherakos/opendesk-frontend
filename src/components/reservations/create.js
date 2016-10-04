@@ -122,7 +122,7 @@ class CreateReservation extends Component {
 
 function mapStateToProps(state) {
 	return {
-		reservation: state.auth.reservationformparams,
+		reservation: state.reservations.reservationformparams,
 		successMessage: state.auth.success,
         errorMessage: state.auth.error,
         initialValues: {

@@ -63,7 +63,7 @@ class Dashboard extends Component {
 	}
 }
 function mapStateToProps(state) {
-    return { dashboard: state.auth.dashboard,
+    return { dashboard: state.dashboard.dashboard,
              loading: state.auth.loading
              };
 }

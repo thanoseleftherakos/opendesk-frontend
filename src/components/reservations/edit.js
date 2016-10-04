@@ -128,8 +128,8 @@ class EditReservation extends Component {
 
 function mapStateToProps(state) {
 	return {
-		reservation: state.auth.reservation,
-		initialValues: state.auth.reservation,
+		reservation: state.reservations.reservation,
+		initialValues: state.reservations.reservation,
 		successMessage: state.auth.success,
         errorMessage: state.auth.error
 	};

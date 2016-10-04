@@ -167,7 +167,7 @@ class SingleReservation extends Component {
 }
 
 function mapStateToProps(state) {
-	return {reservation: state.auth.reservation};
+	return {reservation: state.reservations.reservation};
 }
 
 export default connect(mapStateToProps, actions)(SingleReservation);

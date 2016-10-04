@@ -1,12 +1,11 @@
-import { DASHBOARD } from '../actions/types';
+import { FETCH_DASHBOARD } from '../actions/types';
 
 
 export default function (state = {}, action) {
-	// console.log('dashboard' + action.type);
 	switch(action.type) {
-		case DASHBOARD:
-			return { ...state, dashboard: action.payload };
-			break;
+		case FETCH_DASHBOARD:
+			return { ...state, dashboard: action.payload.data, loading: false };
+	 default: return state;
 	}
 
 	return state;
