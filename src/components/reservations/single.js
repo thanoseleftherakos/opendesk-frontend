@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as actions from '../../actions/reservationsActions';
 import moment from "moment";
 import locale_el from "moment/locale/el";
 import Loader from './../UI/loader';
 
 class SingleReservation extends Component {
 	componentWillMount(){
-		moment.defineLocale("el", locale_el);
+		moment.updateLocale("el", locale_el);
 		this.props.fetchReservation(this.props.params.id);
 	}
 	renderDate(date){
@@ -44,7 +44,7 @@ class SingleReservation extends Component {
                                     <span className="caption-subject font-green bold uppercase">{this.props.reservation.room.name}</span>
                                 </div>
                                 <div className="actions">
-                                    <Link to={`/reservations/edit/${this.props.reservation.id}`} className="btn btn-circle btn-icon-only btn-default">
+                                    <Link to={`/hotel/reservations/edit/${this.props.reservation.id}`} className="btn btn-circle btn-icon-only btn-default">
                                         <i className="icon-pencil"></i>
                                     </Link>
                                     <a className="btn btn-circle btn-icon-only btn-default" href="javascript:;" onClick={this.removeReservation.bind(this)}>

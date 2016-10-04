@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import { fetchDashboard } from '../../actions/dashboardActions';
 import DashboardStat from './dashboard_stat';
 import Portlet from './portlet/';
 import Loader from './../UI/loader';
@@ -68,5 +68,5 @@ function mapStateToProps(state) {
              };
 }
 
-export default connect(mapStateToProps, actions)(Dashboard);
+export default connect(mapStateToProps, { fetchDashboard })(Dashboard);
 

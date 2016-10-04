@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import * as actions from '../../actions';
+import { signupUser } from '../../actions/authActions';
 
 class SignupForm extends Component {
     handleFormSubmit(formProps) {
@@ -107,4 +107,4 @@ export default reduxForm({
     fields: ['name', 'email', 'total_rooms', 'username', 'password', 'rpassword'],
     validate
 
-}, mapStateToProps, actions)(SignupForm);
+}, mapStateToProps, { signupUser })(SignupForm);

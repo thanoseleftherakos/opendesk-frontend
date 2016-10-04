@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import TextInput from './../UI/forms/textinput';
 import SelectOption from './../UI/forms/selectoption';
 import DatePickerField from './../UI/forms/datepicker';
-import * as actions from '../../actions';
+import * as actions from '../../actions/reservationsActions';
 import moment from "moment";
 import Loader from './../UI/loader';
 import Alert from '../UI/alerts';

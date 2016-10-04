@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../../actions'
+import { logoutUser } from '../../../actions/authActions';
 
 class UserProfile extends Component {
 	render() {
@@ -38,7 +38,7 @@ class UserProfile extends Component {
                             <i className="icon-lock"></i> Lock Screen </a>
                     </li>
                     <li>
-                        <a href="#" onClick={() => this.props.logoutUser()} >
+                        <a href="javascript:;" onClick={() => this.props.logoutUser()} >
                             <i className="icon-key"></i> Log Out </a>
                     </li>
                 </ul>
@@ -50,4 +50,4 @@ function mapStateToProps(state) {
     return { authenticated: state.auth.authenticated };
 }
 
-export default connect(mapStateToProps, actions)(UserProfile);
+export default connect(mapStateToProps, { logoutUser })(UserProfile);
