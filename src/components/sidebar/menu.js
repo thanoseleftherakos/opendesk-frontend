@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { I18n } from 'react-redux-i18n';
 
 class Menu extends Component {
 	render() {
@@ -10,22 +11,23 @@ class Menu extends Component {
                         <li className="sidebar-toggler-wrapper hide">
                             <div className="sidebar-toggler"> </div>
                         </li>
-                        <li className="nav-item start ">
+                        <li lassName="nav-item start" ></li>
+                        <li className={'nav-item ' + (this.props.active == '/hotel/dashboard' ? 'active' : '') }>
                             <Link to={'/hotel/dashboard'} className="nav-link nav-toggle">
                                 <i className="icon-home"></i>
                                 <span className="title">Dashboard</span>
                             </Link>
                         </li>
-                        <li className="nav-item start ">
+                        <li className={'nav-item ' + (this.props.active == '/hotel/reservations' ? 'active' : '') }>
                             <Link to={'/hotel/reservations'} className="nav-link nav-toggle">
                                 <i className="icon-calendar"></i>
-                                <span className="title">Reservations</span>
+                                <span className="title">{I18n.t('general.reservations')}</span>
                             </Link>
                         </li>
-                        <li className="nav-item start ">
+                        <li className={'nav-item ' + (this.props.active == '/hotel/reservation/create' ? 'active' : '') }>
                             <Link to={'/hotel/reservation/create'} className="nav-link nav-toggle">
                                 <i className="icon-plus"></i>
-                                <span className="title">New Reservation</span>
+                                <span className="title">{I18n.t('general.new_reservation')}</span>
                             </Link>
                         </li>
                     </ul>

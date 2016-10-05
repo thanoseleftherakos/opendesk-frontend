@@ -11,6 +11,7 @@ import SelectOption from './../UI/forms/selectoption';
 import CheckBox from './../UI/forms/checkbox';
 import Textarea from './../UI/forms/textarea';
 import countries from '../../data/countries';
+import { I18n } from 'react-redux-i18n';
 
 require('style!css!sass!react-datepicker/dist/react-datepicker.css'); 
 
@@ -51,10 +52,10 @@ class EditReservation extends Component {
         const personsArr  = [ { id : "1", name : "1" }, { id : "2", name : "2" }, { id : "3", name : "3" }, { id : "4", name : "4" } ];
 		const { handleSubmit, fields: { client_name, client_phone, client_email, country, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes, ref_id } } = this.props;
 		return (
-			<div className="page-content">
-                <h3 className="page-title">EDIT: {this.props.reservation.client_name}
+			<div>
+                <h3 className="page-title">{I18n.t('general.edit')}: {this.props.reservation.client_name}
                     <small> {this.props.reservation.room.name} | 
-                    		{this.props.reservation.nights} nights | 
+                    		{this.props.reservation.nights} {I18n.t('general.nights', {count: this.props.reservation.nights})} | 
                     		{this.props.reservation.total_price} € 
                     </small>
                     <span className={'label label-sm label-' + (this.props.reservation.status_type.id==1 ? 'success' : 'danger')}>
@@ -68,16 +69,16 @@ class EditReservation extends Component {
                             <div className="portlet-title">
                                 <div className="caption font-green">
                                     <i className="icon-settings font-green"></i>
-                                    <span className="caption-subject bold uppercase"> Edit Reservation</span>
+                                    <span className="caption-subject bold uppercase"> {I18n.t('general.edit_reservation')}</span>
                                 </div>
                             </div>
                             <div className="portlet-body form">
                                 <form role="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                                     <div className="form-body">
-                                        <TextInput type="text" name="Name" data={client_name} />
-                                        <TextInput type="email" name="Email" data={client_email} />
-                                        <TextInput type="text" name="Phone" data={client_phone} />
-                                        <SelectOption name="Country" data={country} options={countries} />
+                                        <TextInput type="text" name={I18n.t('forms.name')} data={client_name} />
+                                        <TextInput type="email" name={I18n.t('forms.email')} data={client_email} />
+                                        <TextInput type="text" name={I18n.t('forms.phone')} data={client_phone} />
+                                        <SelectOption name={I18n.t('forms.country')} data={country} options={countries} />
                                         <DatePickerField 
                                             name="Check In" 
                                             startDate={moment(check_in.value)} 
@@ -91,13 +92,13 @@ class EditReservation extends Component {
                                             selected={moment(check_out.value)}
                                             data={check_out}/>
                                         <div className="clearfix"></div>
-                                        <SelectOption name="Room Type" data={room_type_id} options={this.props.reservation.room_types} />
-                                        <SelectOption name="Persons" data={persons} options={personsArr} />
-                                        <TextInput type="number" name="Price" data={price} />
-                                        <CheckBox name="Breakfast" data={breakfast} />
-                                        <CheckBox name="Deposit" data={deposit} />
+                                        <SelectOption name={I18n.t('forms.room_type')} data={room_type_id} options={this.props.reservation.room_types} />
+                                        <SelectOption name={I18n.t('forms.persons')} data={persons} options={personsArr} />
+                                        <TextInput type="number" name={I18n.t('forms.price')} data={price} />
+                                        <CheckBox name={I18n.t('forms.breakfast')} data={breakfast} />
+                                        <CheckBox name={I18n.t('forms.deposit')} data={deposit} />
                                         {deposit.value &&
-                                            <TextInput type="number" name="Deposit Amount" data={deposit_amount} />
+                                            <TextInput type="number" name={I18n.t('forms.deposit_amount')} data={deposit_amount} />
                                         }
                                         <SelectOption name="Channel" data={channel_id} options={this.props.reservation.channels} />   
                                         {(channel_id.value!=4 && channel_id.value!=5) &&
@@ -110,11 +111,11 @@ class EditReservation extends Component {
                                             </select>
                                             <label htmlFor="form_control_1">Status</label>
                                         </div>
-                                        <Textarea name="Notes" data={notes}/>
+                                        <Textarea name={I18n.t('forms.notes')} data={notes}/>
                                     </div>
                                     {this.renderAlert()}
                                     <div className="form-actions noborder">
-                                        <button type="submit" className="btn blue">Update</button>
+                                        <button type="submit" className="btn blue">{I18n.t('forms.update')}</button>
                                     </div>
                                 </form>
                             </div>
@@ -131,7 +132,8 @@ function mapStateToProps(state) {
 		reservation: state.reservations.reservation,
 		initialValues: state.reservations.reservation,
 		successMessage: state.auth.success,
-        errorMessage: state.auth.error
+        errorMessage: state.auth.error,
+        lang: state.i18n
 	};
 }
 

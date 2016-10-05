@@ -11,7 +11,7 @@ class Portlet extends Component {
             	<PortletItem key={index} id={data.id} title={data.client_name} details={data.room.name + ' | ' + data.nights + ' ' + I18n.t('general.nights', {count: data.nights})} />
         	));
 		}  else {
-			return [<small>{I18n.t('general.noarrivals', {name: this.props.name, count: 1})}</small>]; 
+			return [<small>{I18n.t('general.noarrivals', {name: this.props.name })}</small>]; 
 		}
 	}
 

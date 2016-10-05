@@ -33,6 +33,7 @@ class ReservationsTable extends Component {
 			                    <th width="2%"> # </th>
 			                    <th width="9%"> {I18n.t('general.resvdate')} </th>
 			                    <th> {I18n.t('general.client_name')} </th>
+			                    <th> {I18n.t('forms.country')} </th>
 			                    <th> {I18n.t('general.check_in')} </th>
 			                    <th> {I18n.t('general.check_out')} </th>
 			                    <th> {I18n.t('general.status')} </th>

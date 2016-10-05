@@ -3,12 +3,13 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux';
 import * as actions from '../../actions/reservationsActions';
 import moment from "moment";
-import locale_el from "moment/locale/el";
+import locale_el from "moment/locale/en-gb";
 import Loader from './../UI/loader';
+import { I18n } from 'react-redux-i18n';
 
 class SingleReservation extends Component {
 	componentWillMount(){
-		moment.updateLocale("el", locale_el);
+		moment.updateLocale("en", locale_el);
 		this.props.fetchReservation(this.props.params.id);
 	}
 	renderDate(date){
@@ -24,10 +25,10 @@ class SingleReservation extends Component {
 			return <Loader />
 		}
 		return (
-			<div className="page-content">
+			<div>
                 <h3 className="page-title">{this.props.reservation.client_name} 
                     <small> {this.props.reservation.room.name} | 
-                    		{this.props.reservation.nights} nights | 
+                    		{this.props.reservation.nights} {I18n.t('general.nights', {count: this.props.reservation.nights})} | 
                     		{this.props.reservation.total_price} €
                     </small>
                     <span className={'label label-sm label-' + (this.props.reservation.status_type.id==1 ? 'success' : 'danger')}>
@@ -57,19 +58,19 @@ class SingleReservation extends Component {
                                     <table className="table table-hover">
                                         <tbody>
                                             <tr>
-                                                <td width='30%'> Client Name </td>
+                                                <td width='30%'> {I18n.t('forms.name')} </td>
                                                 <td> {this.props.reservation.client_name} </td>
                                             </tr>
                                             <tr>
-                                                <td> Client Email </td>
+                                                <td> {I18n.t('forms.email')} </td>
                                                 <td> {this.props.reservation.client_email} </td>
                                             </tr>
                                             <tr>
-                                                <td> Client Phone </td>
+                                                <td> {I18n.t('forms.phone')} </td>
                                                 <td> {this.props.reservation.client_phone} </td>
                                             </tr>
                                             <tr>
-                                                <td> Country </td>
+                                                <td> {I18n.t('forms.country')} </td>
                                                 <td> {this.props.reservation.country} </td>
                                             </tr>
                                             <tr>
@@ -81,54 +82,54 @@ class SingleReservation extends Component {
                                                 <td> {this.props.reservation.check_out} </td>
                                             </tr>
                                             <tr>
-                                                <td> Room type </td>
+                                                <td> {I18n.t('forms.room_type')} </td>
                                                 <td> {this.props.reservation.room.name} </td>
                                             </tr>
                                             <tr>
-                                                <td> Persons </td>
+                                                <td> {I18n.t('forms.persons')} </td>
                                                 <td> {this.props.reservation.persons} </td>
                                             </tr>
                                             <tr>
-                                                <td> Arrival </td>
+                                                <td> {I18n.t('general.arrivals', {count:1})} </td>
 
                                                 <td> { this.renderDate(this.props.reservation.check_in) } </td>
                                             </tr>
                                             <tr>
-                                                <td> Departure </td>
+                                                <td> {I18n.t('general.departures', {count:1})} </td>
                                                 <td> { this.renderDate(this.props.reservation.check_out) } </td>
                                             </tr>
                                             <tr>
-                                                <td> Nights </td>
+                                                <td> {I18n.t('general.nights')} </td>
                                                 <td> {this.props.reservation.nights} </td>
                                             </tr>
                                             <tr>
-                                                <td> Breakfast </td>
+                                                <td> {I18n.t('forms.breakfast')} </td>
                                                 <td>
                                                 	<span className={'label label-sm label-' + (this.props.reservation.breakfast ? 'success ' : 'danger')}>
-                                                 		{(this.props.reservation.breakfast ? 'YES' : 'NO')}
+                                                 		{(this.props.reservation.breakfast ? I18n.t('general.yes') : I18n.t('general.no'))}
                                                  	</span> 
                                                  </td> 
                                             </tr>
                                             <tr>
-                                                <td> Deposit </td>
+                                                <td> {I18n.t('forms.deposit')} </td>
                                                 <td>
                                                 	<span className={'label label-sm label-' + (this.props.reservation.deposit ? 'success' : 'danger')}>
-                                                 		{(this.props.reservation.deposit ? 'YES' : 'NO')}
+                                                 		{(this.props.reservation.deposit ? I18n.t('general.yes') : I18n.t('general.no'))}
                                                  	</span> 
                                                  </td> 
                                             </tr>
                                             {this.props.reservation.deposit &&
                                             <tr>
-                                                <td> Deposit Amount </td>
+                                                <td> {I18n.t('forms.deposit_amount')} </td>
                                                 <td> {this.props.reservation.deposit_amount} € </td>
                                             </tr>
                                             }
                                             <tr>
-                                                <td> Price per night </td>
+                                                <td> {I18n.t('forms.price')} </td>
                                                 <td> {this.props.reservation.price} €</td>
                                             </tr>
                                             <tr>
-                                                <td> Total price </td>
+                                                <td> {I18n.t('forms.total_price')} </td>
                                                 <td> {this.props.reservation.total_price} € </td>
                                             </tr>
                                             <tr>
@@ -142,7 +143,7 @@ class SingleReservation extends Component {
                                                 </tr>
                                             }
                                             <tr>
-                                                <td> Status </td>
+                                                <td> {I18n.t('forms.status')} </td>
                                                 <td>
                                                 	<span className={'label label-sm label-' + (this.props.reservation.status_type.type ? 'success' : 'danger')}>
                                                  		{this.props.reservation.status_type.type}  <i className={'icon-' + (this.props.reservation.status_type.type ? 'check' : 'close')} ></i>
@@ -150,7 +151,7 @@ class SingleReservation extends Component {
                                                  </td> 
                                             </tr>
                                             <tr>
-                                                <td> Notes </td>
+                                                <td> {I18n.t('forms.notes')} </td>
                                                 <td> {this.props.reservation.notes} </td>
                                             </tr>
                                         </tbody>
@@ -167,7 +168,7 @@ class SingleReservation extends Component {
 }
 
 function mapStateToProps(state) {
-	return {reservation: state.reservations.reservation};
+	return {reservation: state.reservations.reservation,lang: state.i18n};
 }
 
 export default connect(mapStateToProps, actions)(SingleReservation);

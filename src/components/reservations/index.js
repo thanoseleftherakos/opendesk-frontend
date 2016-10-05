@@ -10,6 +10,7 @@ import moment from "moment";
 import Loader from './../UI/loader';
 import Alert from '../UI/alerts';
 import ReservationsTable from './../UI/reservations_table';
+import { I18n } from 'react-redux-i18n';
 
 class Reservations extends Component { 
     
@@ -44,38 +45,38 @@ class Reservations extends Component {
 
 	render() {
 		const { handleSubmit, fields: { query, stay_from, stay_to, type } } = this.props;
-        const typesArr  = [ { id : "rs_date", name : "Reservation Date" }, { id : "arr_date", name : "Arrival Date" }, { id : "dp_date", name : "Departure Date" } ];
+        const typesArr  = [ { id : "rs_date", name : I18n.t('general.rs_date') }, { id : "arr_date", name : I18n.t('general.arr_date') }, { id : "dp_date", name : I18n.t('general.dp_date') } ];
 		if(!this.props.reservations) {
 			return <Loader /> 
 		}
 		return(
-			<div className="page-content">
-                <h1 className="page-title">Your reservations</h1>
+			<div>
+                <h1 className="page-title">{I18n.t('general.your_reservations')}</h1>
                 <div className="row">
 	                <div className="col-md-12">
 						<div className="note note-info">
                             <div className="filters-container">
 								<form role="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-									<TextInput name="Search" placeholder="Enter your search criteria" data={query} />
-                                    <SelectOption name="Type" data={type} options={typesArr} />
+									<TextInput name={I18n.t('general.search')}  placeholder={I18n.t('general.search_criteria')} data={query} />
+                                    <SelectOption name={I18n.t('general.type')} data={type} options={typesArr} />
 									<DatePickerField 
-                                            name="From" 
+                                            name={I18n.t('general.from')} 
                                             startDate={moment(stay_from.value)} 
                                             endDate={moment(stay_to.value)} 
                                             selected={moment(stay_from.value)} 
                                             data={stay_from}/>
                                         <DatePickerField 
-                                            name="To" 
+                                            name={I18n.t('general.to')}  
                                             startDate={moment(stay_from.value)} 
                                             endDate={moment(stay_to.value)} 
                                             selected={moment(stay_to.value)}
                                             data={stay_to}/>
 									<div className="clearfix"></div>
-									<button type="submit" className="btn btn-success">Search</button>
+									<button type="submit" className="btn btn-success">{I18n.t('general.search')} </button>
 								</form>
                             </div>
                         </div>	
-                        <ReservationsTable reservations={ this.props.reservations } title="Results" />
+                        <ReservationsTable reservations={ this.props.reservations } title={I18n.t('general.search_results')} />
                         {this.renderAlert()}               
 	               		</div>
                 </div>
@@ -93,7 +94,8 @@ function mapStateToProps(state) {
 		reservations: state.reservations.reservations,
         successMessage: state.auth.success,
         errorMessage: state.auth.error,
-        loading: state.auth.loading
+        loading: state.auth.loading,
+        lang: state.i18n
 	};
 }
 

@@ -7,9 +7,11 @@ import reduxThunk from 'redux-thunk';
 import { AUTH_USER } from './actions/types';
 import reducers from './reducers';
 import routes from './routes';
-
 import styles from './main.scss'; 
 import translations from './translations/translations';
+import moment from "moment";
+import en from "moment/locale/en-gb";
+import el from "moment/locale/el";
 
 import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n';
 // const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -26,7 +28,15 @@ const store = createStore(
 syncTranslationWithStore(store)
 
 store.dispatch(loadTranslations(translations));
-store.dispatch(setLocale('el'));
+const lang = localStorage.getItem('lang');
+if(lang) {
+  store.dispatch(setLocale(lang));  
+  moment.updateLocale(lang, lang);
+} else {
+  store.dispatch(setLocale('en')); //english fallback  
+  moment.updateLocale('en', en);
+}
+
 
 //check if user is logged in
 const token = localStorage.getItem('token');

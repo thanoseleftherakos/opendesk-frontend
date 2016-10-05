@@ -29,14 +29,14 @@ class Dashboard extends Component {
             return <Loader />
         }
 		return (
-                <div className="page-content">
+                <div>
                     <h3 className="page-title">{this.props.dashboard.hotel.name} 
                         <small> dashboard & statistics</small>
                     </h3>
                     <div className="row">
-                        <DashboardStat key="dash1" name={I18n.t('dashboard.stats.freerooms')} value={this.props.dashboard.available_rooms_today} color="green" icon="fa-shopping-cart" />
-                        <DashboardStat key="dash2" name={I18n.t('dashboard.stats.departures')} value={this.props.dashboard.departures_today_count} color="purple" icon="fa-globe" />
-                        <DashboardStat key="dash3" name={I18n.t('dashboard.stats.totalR')} value={this.props.dashboard.total_reservations} color="blue" icon="fa-comments" />
+                        <DashboardStat key="dash1" name={I18n.t('dashboard.stats.freerooms', {count: this.props.dashboard.available_rooms_today})} value={this.props.dashboard.available_rooms_today} color="green" icon="fa-shopping-cart" />
+                        <DashboardStat key="dash2" name={I18n.t('dashboard.stats.departures', {count: this.props.dashboard.departures_today_count})} value={this.props.dashboard.departures_today_count} color="purple" icon="fa-globe" />
+                        <DashboardStat key="dash3" name={I18n.t('dashboard.stats.totalR', {count: this.props.dashboard.total_reservations})} value={this.props.dashboard.total_reservations} color="blue" icon="fa-comments" />
                         <DashboardStat key="dash4" name={I18n.t('dashboard.stats.totalP')} value={this.props.dashboard.total_earnings} color="red" icon="fa-bar-chart-o" />
                     </div>
                     <div className="row">
@@ -49,7 +49,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-12">
-                            <ReservationsTable reservations={ this.props.dashboard.current_rooms } title="Current rooms"/>
+                            <ReservationsTable reservations={ this.props.dashboard.current_rooms } title={I18n.t('general.current_rooms')}/>
                         </div>
                     </div>
                      <div className="row">
@@ -65,7 +65,8 @@ class Dashboard extends Component {
 }
 function mapStateToProps(state) {
     return { dashboard: state.dashboard.dashboard,
-             loading: state.auth.loading
+             loading: state.auth.loading,
+             lang: state.i18n
              };
 }
 
