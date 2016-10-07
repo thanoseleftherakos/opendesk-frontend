@@ -51,7 +51,7 @@ class CreateReservation extends Component {
 			return <Loader />
 		}
         const personsArr  = [ { id : "1", name : "1" }, { id : "2", name : "2" }, { id : "3", name : "3" }, { id : "4", name : "4" } ];
-		const { handleSubmit, fields: { client_name, client_phone, client_email, country, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes, ref_id } } = this.props;
+		const { handleSubmit, fields: { client_name, client_phone, client_email, country, check_in, check_out, deposit, deposit_amount, persons, price, breakfast, channel_id, room_type_id, status_id, notes, ref_id, room_number } } = this.props;
 		return (
 			<div>
                 <h3 className="page-title"> {I18n.t('general.new_reservation')}
@@ -90,6 +90,7 @@ class CreateReservation extends Component {
                                         <SelectOption name={I18n.t('forms.persons')} data={persons} options={personsArr} />
                                         <TextInput type="number" name={I18n.t('forms.price')} data={price} />
                                         <CheckBox name={I18n.t('forms.breakfast')} data={breakfast} />
+                                        <TextInput type="number" name={I18n.t('forms.room_num')} data={room_number} />
                                         <CheckBox name={I18n.t('forms.deposit')} data={deposit} />
                                         {deposit.value &&
                                             <TextInput type="number" name={I18n.t('forms.deposit_amount')} data={deposit_amount} />
@@ -179,7 +180,7 @@ function validate(formProps) {
 export default reduxForm({
 
     form: 'create_reservation',
-    fields: ['client_name', 'client_email', 'client_phone', 'country', 'check_in', 'check_out', 'deposit', 'deposit_amount', 'persons', 'price', 'breakfast', 'channel_id', 'room_type_id', 'status_id', 'notes', 'ref_id'],
+    fields: ['client_name', 'client_email', 'client_phone', 'country', 'check_in', 'check_out', 'deposit', 'deposit_amount', 'persons', 'price', 'breakfast', 'channel_id', 'room_type_id', 'status_id', 'notes', 'ref_id', 'room_number'],
     validate
 
 }, mapStateToProps, actions)(CreateReservation);

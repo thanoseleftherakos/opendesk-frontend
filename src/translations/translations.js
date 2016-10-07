@@ -137,6 +137,7 @@ module.exports = {
       breakfast: 'Πρωινό',
       deposit: 'Προκαταβολή',
       deposit_amount: 'Ποσό Προκαταβολής',
+      room_num: 'Αρ. Δωμ',
       status: 'Κατάσταση',
       notes: 'Σημειώσεις',
       create: 'Δημιουργία',

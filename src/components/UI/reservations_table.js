@@ -30,7 +30,7 @@ class ReservationsTable extends Component {
 			        <table className="table table-bordered table-striped table-condensed flip-content">
 			            <thead className="flip-content">
 			                <tr>
-			                    <th width="2%"> # </th>
+			                    <th width="2%"> {I18n.t('forms.room_num')} </th>
 			                    <th width="9%"> {I18n.t('general.resvdate')} </th>
 			                    <th> {I18n.t('general.client_name')} </th>
 			                    <th> {I18n.t('forms.country')} </th>

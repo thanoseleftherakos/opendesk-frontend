@@ -7,7 +7,7 @@ class ReservationsTableRow extends Component {
 
     return (
         <tr>
-            <td> { this.props.index+1 } </td>
+            <td> { this.props.data.room_number } </td>
             <td> { moment(this.props.data.created_at).format('DD/MM/YYYY') } </td>
             <td> 
             	<Link to={`/hotel/reservations/${this.props.data.id}`} >
