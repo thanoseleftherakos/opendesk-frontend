@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import Topmenu from './topmenu/topmenu';
 
 class Header extends Component{
+	componentDidMount(){
+		QuickSidebar.init();
+	}
 	render() {
 		return (
 			<div className="page-header navbar navbar-fixed-top">

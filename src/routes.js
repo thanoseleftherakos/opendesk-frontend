@@ -10,6 +10,7 @@ import SingleReservation from './components/reservations/single';
 import Reservations from './components/reservations/index';
 import EditReservation from './components/reservations/edit';
 import CreateReservation from './components/reservations/create';
+import Availability from './components/availability/index';
 
 import requiereAuth from './components/require_auth';
 
@@ -23,6 +24,7 @@ export default (
 			<Route path="reservations/:id" component={SingleReservation} />
 			<Route path="reservations/edit/:id" component={EditReservation} />
 			<Route path="reservation/create" component={CreateReservation} />
+			<Route path="availability" component={Availability} />
 		</Route>
 		<Route path="/login" component={Login} />
 	</Route>

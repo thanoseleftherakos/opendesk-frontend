@@ -123,7 +123,8 @@ module.exports = {
       edit_reservation: 'Επεξεργασία Κράτησης',
       edit: 'Επεξεργασία',
       no: 'ΟΧΙ',
-      yes: 'ΝΑΙ'
+      yes: 'ΝΑΙ',
+      check_availability: 'Έλεγχος Διαθεσιμότητας'
     },
     forms: {
       name: 'Όνομα',
