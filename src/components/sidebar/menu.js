@@ -28,9 +28,18 @@ class Menu2 extends Component {
                         </li>
                         <li className={'nav-item ' + (this.props.active == '/hotel/reservation/create' ? 'active' : '') }>
                             <Link to={'/hotel/reservation/create'} className="nav-link nav-toggle">
-                                <i className="icon-calendar"></i>
+                                <i className="icon-event"></i>
                                 <span className="title">{I18n.t('general.new_reservation')}</span>
                                 {(this.props.active == '/hotel/reservation/create') && 
+                                    <span className="selected"></span>
+                                }
+                            </Link>
+                        </li>
+                        <li className={'nav-item ' + (this.props.active == '/hotel/availability' ? 'active' : '') }>
+                            <Link to={'/hotel/availability'} className="nav-link nav-toggle">
+                                <i className="icon-calendar"></i>
+                                <span className="title">{I18n.t('general.availability')}</span>
+                                {(this.props.active == '/hotel/availability') && 
                                     <span className="selected"></span>
                                 }
                             </Link>

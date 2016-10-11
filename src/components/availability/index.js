@@ -5,7 +5,8 @@ import { Link } from 'react-router';
 import TextInput from './../UI/forms/textinput';
 import SelectOption from './../UI/forms/selectoption';
 import DatePickerField from './../UI/forms/datepicker';
-import * as actions from '../../actions/reservationsActions';
+import {checkAvailability} from '../../actions/availabilityActions';
+import {roomTypes} from '../../actions/index';
 import moment from "moment";
 import Loader from './../UI/loader';
 import Alert from '../UI/alerts';
@@ -15,8 +16,8 @@ import { I18n } from 'react-redux-i18n';
 class Availability extends Component { 
     
     componentWillMount(){
-        if(!this.props.reservations){
-            this.fetchData();
+        if(!this.props.room_types){
+            this.props.roomTypes();
         }
     }
     componentDidUpdate(){
@@ -24,31 +25,24 @@ class Availability extends Component {
         Layout.init();
     }
 	handleFormSubmit(formProps) {
-        this.props.fetchReservations(formProps);
+        this.props.checkAvailability(formProps);
     }
-    renderAlert() { 
-        if (this.props.errorMessage) {
-            return (
-                <Alert type="danger" icon="warning" message={this.props.errorMessage} />
-            );
+    renderDate(availability, status){
+        if(this.props.availability_status == "error") {
+            return availability.map((data) => (
+                <p key={data.date}>{data.date} - {I18n.t('general.booked_rooms', { count:data.sum })}</p>
+            ));
         }
-        if(this.props.successMessage) {
-         return (
-                <Alert type="success" icon="check" message={this.props.successMessage} />
-            );   
-        }
-    }
-
-    fetchData(formProps) {
-    	this.props.fetchReservations(formProps);
+        return availability.map((data) => (
+            <p key={data.date}>{data.date} - {I18n.t('general.free_rooms', { count:data.sum })}</p>
+        ));
     }
 
 	render() {
-		const { handleSubmit, fields: { query, stay_from, stay_to, type } } = this.props;
-        const typesArr  = [ { id : "rs_date", name : I18n.t('general.rs_date') }, { id : "arr_date", name : I18n.t('general.arr_date') }, { id : "dp_date", name : I18n.t('general.dp_date') } ];
-		if(!this.props.reservations) {
-			return <Loader /> 
-		}
+		const { handleSubmit, fields: { check_in, check_out, room_type_id } } = this.props;
+        if(!this.props.room_types) {
+            return <Loader /> 
+        }
 		return(
 			<div>
                 <h1 className="page-title">{I18n.t('general.check_availability')}</h1>
@@ -57,26 +51,31 @@ class Availability extends Component {
 						<div className="note note-info">
                             <div className="filters-container">
 								<form role="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+                                    <SelectOption name={I18n.t('general.type')} data={room_type_id} options={this.props.room_types} />
 									<DatePickerField 
                                             name={I18n.t('general.from')} 
-                                            startDate={moment(stay_from.value)} 
-                                            endDate={moment(stay_to.value)} 
-                                            selected={moment(stay_from.value)} 
-                                            data={stay_from}/>
+                                            startDate={moment(check_in.value)} 
+                                            endDate={moment(check_out.value)} 
+                                            selected={moment(check_in.value)} 
+                                            data={check_in}/>
                                         <DatePickerField 
                                             name={I18n.t('general.to')}  
-                                            startDate={moment(stay_from.value)} 
-                                            endDate={moment(stay_to.value)} 
-                                            selected={moment(stay_to.value)}
-                                            data={stay_to}/>
+                                            startDate={moment(check_in.value)} 
+                                            endDate={moment(check_out.value)} 
+                                            selected={moment(check_out.value)}
+                                            data={check_out}/>
 									<div className="clearfix"></div>
 									<button type="submit" className="btn btn-success">{I18n.t('general.search')} </button>
 								</form>
                             </div>
                         </div>	
-                        <ReservationsTable reservations={ this.props.reservations } title={I18n.t('general.search_results')} />
-                        {this.renderAlert()}               
-	               		</div>
+                        {this.props.availability_status &&
+                            <div className={"note note-" + this.props.availability_status}>
+                                <h4 className="block">{this.props.availability_status== "success" ? I18n.t('general.you_have_available_rooms') : I18n.t('general.no_available_rooms') }</h4>
+                                {this.renderDate(this.props.availability, this.props.availability_status)}
+                            </div>
+                        }         
+	               	</div>
                 </div>
                 {this.props.loading &&
                     <Loader />
@@ -89,7 +88,9 @@ class Availability extends Component {
 
 function mapStateToProps(state) {
 	return {
-		reservations: state.reservations.reservations,
+        room_types: state.general.room_types,
+        availability: state.general.availability,
+        availability_status: state.general.availability_status,
         successMessage: state.auth.success,
         errorMessage: state.auth.error,
         loading: state.auth.loading,
@@ -99,14 +100,14 @@ function mapStateToProps(state) {
 
 
 export default reduxForm({
-
+    
     form: 'edit_reservation',
-    fields: ['query', 'stay_from', 'stay_to', 'type'],
+    fields: ['check_in', 'check_out', 'room_type_id'],
+    enableReinitialize: true,
     initialValues: {
-        stay_from: moment().format('YYYY/MM/DD'),
-        stay_to: moment().add(1, 'days').format('YYYY/MM/DD'),
-        query: '',
-        type: 'arr_date'
+        check_in: moment().format('YYYY/MM/DD'),
+        check_out: moment().add(1, 'days').format('YYYY/MM/DD')
+
     }
 
-}, mapStateToProps, actions)(Availability);
+}, mapStateToProps, { checkAvailability, roomTypes })(Availability);

@@ -78,7 +78,7 @@ class Reservations extends Component {
                         </div>	
                         <ReservationsTable reservations={ this.props.reservations } title={I18n.t('general.search_results')} />
                         {this.renderAlert()}               
-	               		</div>
+	               	</div>
                 </div>
                 {this.props.loading &&
                     <Loader />

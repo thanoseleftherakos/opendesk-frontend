@@ -11,3 +11,5 @@ export const FETCH_RESERVATIONS = 'request_reservations';
 export const REMOVE_RESERVATION = 'remove_reservation';
 export const LOADING = 'loading';
 export const CHANGE_LANGUAGE = 'language';
+export const CHECK_AVAILABILITY = 'check_availability';
+export const ROOM_TYPES = 'room_types';

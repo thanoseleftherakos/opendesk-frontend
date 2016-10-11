@@ -22,7 +22,6 @@ export function loginUser({ email, password }) {
 
 export function logoutUser() {
 	localStorage.removeItem('token'); 
-	setAuthorizationToken(false);
 	return {
 		type: UNAUTH_USER
 	};

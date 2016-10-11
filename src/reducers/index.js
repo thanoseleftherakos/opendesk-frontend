@@ -3,6 +3,7 @@ import { reducer as form } from 'redux-form';
 import authReducer from './auth_reducer';
 import dashboardReducer from './dashboard_reducer';
 import reservationsReducer from './reservations_reducer';
+import generalReducer from './general_reducer';
 import { i18nReducer } from 'react-redux-i18n';
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
 	auth: authReducer,
 	dashboard: dashboardReducer,
 	reservations: reservationsReducer,
+	general: generalReducer,
 	i18n: i18nReducer
 });
 

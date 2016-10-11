@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import {  REQUEST_ERROR, REQUEST_SUCCESS, CHANGE_LANGUAGE } from './types';
+import {  REQUEST_ERROR, REQUEST_SUCCESS, CHANGE_LANGUAGE, ROOM_TYPES } from './types';
 import { setLocale } from 'react-redux-i18n';
 import moment from "moment";
 import en from "moment/locale/en-gb";
@@ -29,4 +29,26 @@ export function changeLanguage(lang) {
 		localStorage.setItem('lang', lang);
 		dispatch(setLocale(lang));
 	}
+}
+
+
+export function roomTypes() {
+	return function (dispatch) {
+		axios.get(`${ROOT_URL}/room_types`,  {
+			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+		})
+		.then(response => {
+			dispatch({ 
+				type: ROOM_TYPES,
+				payload: response.data
+			});
+		})
+		.catch(error => {
+			if(error.response.status == 401) {
+				localStorage.removeItem('token');
+				browserHistory.push('/login');	
+			}
+			
+		});
+	};
 }

@@ -48,8 +48,13 @@ module.exports = {
       edit_reservation: 'Edit Reservation',
       edit: 'Edit',
       no: 'NO',
-      yes: 'YES'
-
+      yes: 'YES',
+      free_rooms: '%{count} available rooms',
+      free_rooms_1: '%{count} available room',
+      you_have_available_rooms: 'You have the following available rooms for the given dates:',
+      no_available_rooms: 'Your hotel is fully booked for the following dates:',
+      booked_rooms: '%{count} rooms',
+      booked_rooms_1: '%{count} room'
     },
     forms: {
       name: 'Name',
@@ -124,7 +129,16 @@ module.exports = {
       edit: 'Επεξεργασία',
       no: 'ΟΧΙ',
       yes: 'ΝΑΙ',
-      check_availability: 'Έλεγχος Διαθεσιμότητας'
+      check_availability: 'Έλεγχος Διαθεσιμότητας',
+      availability : 'Διαθεσιμότητα',
+      free_rooms: '%{count} διαθέσιμα δωμάτια',
+      free_rooms_1: '%{count} διαθέσιμo δωμάτιο',
+      you_have_available_rooms: 'Έχετε τα παρακάτω διαθέσιμα δωμάτια για τις ημερομηνίες που επιλέξατε:',
+      no_available_rooms: 'Το ξονοδοχείο σας είναι πλήρες τις παρακάτω ημερομηνίες:',
+      booked_rooms: '%{count} δωμάτια',
+      booked_rooms_1: '%{count} δωμάτιο'
+      
+
     },
     forms: {
       name: 'Όνομα',
