@@ -5,9 +5,9 @@ import { FETCH_DASHBOARD, LOADING } from './types';
 const ROOT_URL = 'http://dev.webf8.net/hotelapi/public';
 
 
-export function fetchDashboard() {
+export function fetchDashboard(date) {
 	return function (dispatch) {
-		axios.get(`${ROOT_URL}/hotelinfo`, {
+		axios.post(`${ROOT_URL}/hotelinfo`, {date: date}, {
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 		})
 		.then(response => {

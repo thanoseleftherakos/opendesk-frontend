@@ -33,7 +33,7 @@ class App extends Component {
                                 <div className="page-toolbar" style={{'float' : 'left', 'width' : '100%'}}>
                                     <div id="dashboard-report-range" className="pull-left">
                                         <i className="icon-calendar"></i>&nbsp;
-                                        <span className="thin uppercase hidden-xs">{moment().format('dddd DD MMMM YY')}</span>&nbsp;
+                                        <span className="thin uppercase hidden-xs">{moment().format('dddd DD MMMM Y')}</span>&nbsp;
                                     </div>
                                     <div className="btn-group pull-right">
                                         <button type="button" className="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Language

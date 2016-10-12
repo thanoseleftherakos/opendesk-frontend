@@ -116,6 +116,7 @@ export function fetchReservationFormParams() {
 
 export function fetchReservations(formData) {
 	return function(dispatch) {
+		console.log(formData);
 		dispatch({ type: LOADING, payload: true });
 		axios.post(`${ROOT_URL}/reservations/search`, formData ,{
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }

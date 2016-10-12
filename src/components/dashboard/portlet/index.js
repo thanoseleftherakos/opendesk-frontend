@@ -23,6 +23,7 @@ class Portlet extends Component {
 	                    <i className="icon-globe font-green-sharp"></i>
 	                    <span className="caption-subject font-green-sharp bold uppercase">{this.props.name}</span>
 	                </div>
+	                {this.props.tab2 &&
 	                <ul className="nav nav-tabs">
                         <li className="active">
                             <a href={"#tab_1_1_" + this.props.name} data-toggle="tab" aria-expanded="false"> {I18n.t('general.today')} </a>
@@ -31,6 +32,7 @@ class Portlet extends Component {
                             <a href={"#tab_1_2_" + this.props.name } data-toggle="tab" aria-expanded="true"> {I18n.t('general.tomorrow')} </a>
                         </li>
                     </ul>
+                	}
 	            </div>
 	            <div className="portlet-body">
 	                <div className="tab-content">

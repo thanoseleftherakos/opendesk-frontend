@@ -30,7 +30,9 @@ module.exports = {
       actions: 'Actions',
       nights: 'Nights',
       nights_1: 'Night',
-      current_rooms: 'Current Roooms',
+      current_rooms: 'Current roooms (%{count})',
+      current_rooms_0 : "You don't have any room in your hotel for the specific day",
+      current_rooms_1 : 'Current room (%{count})',
       reservations: 'Reservations',
       reservations_1: 'Reservation',
       new_reservation: 'New Reservation',
@@ -110,7 +112,9 @@ module.exports = {
       actions: 'Actions',
       nights: 'Νύχτες',
       nights_1: 'Νύχτα',
-      current_rooms : 'Δωμάτια στο ξενοδοχείο',
+      current_rooms : 'Δωμάτια στο ξενοδοχείο (%{count})',
+      current_rooms_0 : 'Δεν έχετε κανένα δωμάτιο στο ξενοδοχείο για την συγκεκριμένη ημ/νία',
+      current_rooms_1 : 'Δωμάτιο στο ξενοδοχείο (%{count})',
       reservations: 'Κρατήσεις',
       reservations_1: 'Κράτηση',
       new_reservation: 'Νέα Κράτηση',
@@ -136,7 +140,8 @@ module.exports = {
       you_have_available_rooms: 'Έχετε τα παρακάτω διαθέσιμα δωμάτια για τις ημερομηνίες που επιλέξατε:',
       no_available_rooms: 'Το ξονοδοχείο σας είναι πλήρες τις παρακάτω ημερομηνίες:',
       booked_rooms: '%{count} δωμάτια',
-      booked_rooms_1: '%{count} δωμάτιο'
+      booked_rooms_1: '%{count} δωμάτιο',
+      dashboard_date: 'Αλλαγή ημ/ίας'
       
 
     },

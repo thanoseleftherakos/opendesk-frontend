@@ -10,3 +10,13 @@ body{
     border-color: #fbe1e3;
     color: #e73d4a;
 }
+.topDashboard {
+	.form-group{
+		margin:0px;
+		padding:0px;
+		input{
+			min-width: 200px;
+    		text-align: right;
+		}
+	}
+}
