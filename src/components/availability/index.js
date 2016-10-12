@@ -71,7 +71,9 @@ class Availability extends Component {
                         </div>	
                         {this.props.availability_status &&
                             <div className={"note note-" + this.props.availability_status}>
-                                <h4 className="block">{this.props.availability_status== "success" ? I18n.t('general.you_have_available_rooms') : I18n.t('general.no_available_rooms') }</h4>
+                                <h4 className="block">
+                                    {this.props.availability_status== "success" ? I18n.t('general.you_have_available_rooms') : I18n.t('general.no_available_rooms') }
+                                </h4>
                                 {this.renderDate(this.props.availability, this.props.availability_status)}
                             </div>
                         }         

@@ -12,7 +12,6 @@ export function checkAvailability(formData) {
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 		})
 		.then(response => {
-			console.log(response.data);
 			dispatch({ type: LOADING, payload: false });
 			dispatch({ 
 				type: CHECK_AVAILABILITY,
