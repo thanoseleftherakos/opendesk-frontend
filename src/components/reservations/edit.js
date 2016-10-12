@@ -98,7 +98,7 @@ class EditReservation extends Component {
                                         <CheckBox name={I18n.t('forms.breakfast')} data={breakfast} />
                                         <TextInput type="number" name={I18n.t('forms.room_num')} data={room_number} />
                                         <CheckBox name={I18n.t('forms.deposit')} data={deposit} />
-                                        {deposit.value &&
+                                        {deposit.value !=0 &&
                                             <TextInput type="number" name={I18n.t('forms.deposit_amount')} data={deposit_amount} />
                                         }
                                         <SelectOption name="Channel" data={channel_id} options={this.props.reservation.channels} />   

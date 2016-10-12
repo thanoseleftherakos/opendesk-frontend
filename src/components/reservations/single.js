@@ -118,7 +118,7 @@ class SingleReservation extends Component {
                                                  	</span> 
                                                  </td> 
                                             </tr>
-                                            {this.props.reservation.deposit &&
+                                            {this.props.reservation.deposit != 0 &&
                                             <tr>
                                                 <td> {I18n.t('forms.deposit_amount')} </td>
                                                 <td> {this.props.reservation.deposit_amount} € </td>
@@ -136,7 +136,7 @@ class SingleReservation extends Component {
                                                 <td> Channel </td>
                                                 <td> {this.props.reservation.channel.name} </td>
                                             </tr>
-                                            {this.props.reservation.ref_id &&
+                                            {this.props.reservation.ref_id != 0 &&
                                                 <tr>
                                                     <td> Ref.id </td>
                                                     <td> {this.props.reservation.ref_id} </td>
