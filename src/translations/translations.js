@@ -141,7 +141,8 @@ module.exports = {
       no_available_rooms: 'Το ξονοδοχείο σας είναι πλήρες τις παρακάτω ημερομηνίες:',
       booked_rooms: '%{count} δωμάτια',
       booked_rooms_1: '%{count} δωμάτιο',
-      dashboard_date: 'Αλλαγή ημ/ίας'
+      dashboard_date: 'Αλλαγή ημ/νίας',
+      settings: 'Ρυθμίσεις'
       
 
     },

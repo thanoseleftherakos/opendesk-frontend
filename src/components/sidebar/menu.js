@@ -44,6 +44,15 @@ class Menu2 extends Component {
                                 }
                             </Link>
                         </li>
+                        <li className={'nav-item ' + (this.props.active == '/hotel/settings' ? 'active' : '') }>
+                            <Link to={'/hotel/settings'} className="nav-link nav-toggle">
+                                <i className="icon-settings"></i>
+                                <span className="title">{I18n.t('general.settings')}</span>
+                                {(this.props.active == '/hotel/settings') && 
+                                    <span className="selected"></span>
+                                }
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>

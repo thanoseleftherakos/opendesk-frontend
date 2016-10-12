@@ -33,8 +33,8 @@ export function editReservation(formData,id) {
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 		})
 		.then(response => {
-			dispatch(requestSuccess(response.data)); 
-
+			dispatch(requestSuccess(response.data.message)); 
+			browserHistory.push(`/hotel/reservations/${response.data.data}`);
 		})
 		.catch(error => {
 			if(error.response.status == 401) {
@@ -56,8 +56,8 @@ export function createReservation(formData,id) {
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 		})
 		.then(response => {			
-			dispatch(requestSuccess(response.data)); 
-
+			dispatch(requestSuccess(response.data.message)); 
+			browserHistory.push(`/hotel/reservations/${response.data.data}`);
 		})
 		.catch(error => {
 			if(error.response.status == 401) {
@@ -116,7 +116,6 @@ export function fetchReservationFormParams() {
 
 export function fetchReservations(formData) {
 	return function(dispatch) {
-		console.log(formData);
 		dispatch({ type: LOADING, payload: true });
 		axios.post(`${ROOT_URL}/reservations/search`, formData ,{
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }

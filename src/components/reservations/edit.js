@@ -132,8 +132,6 @@ function mapStateToProps(state) {
 	return {
 		reservation: state.reservations.reservation,
 		initialValues: state.reservations.reservation,
-		successMessage: state.auth.success,
-        errorMessage: state.auth.error,
         lang: state.i18n
 	};
 }

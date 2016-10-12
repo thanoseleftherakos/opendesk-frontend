@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import moment from "moment";
 import { changeLanguage } from '../actions';
+import Alert from './UI/alerts';
+import Loader from './UI/loader';
 
 class App extends Component {
     componentWillMount() {
@@ -16,6 +18,19 @@ class App extends Component {
     }
     switchLang(lang){
         this.props.changeLanguage(lang);
+    }
+
+    renderAlert() {
+        if (this.props.errorMessage) {
+            return (
+                <Alert type="danger" icon="warning" message={this.props.errorMessage} />
+            );
+        }
+        if(this.props.successMessage) {
+         return (
+                <Alert type="success" icon="check" message={this.props.successMessage} />
+            );   
+        }
     }
 
 
@@ -51,7 +66,11 @@ class App extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>                        
+                            </div> 
+                            {this.renderAlert()}     
+                            {this.props.loading &&
+                                <Loader />
+                            }
                             {this.props.children}
                         </div>
                     </div>
@@ -65,7 +84,10 @@ class App extends Component {
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
-        lang: state.i18n
+        lang: state.i18n,
+        successMessage: state.general.success,
+        errorMessage: state.general.error,
+        loading: state.general.loading
     };
 }
 

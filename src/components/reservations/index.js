@@ -80,9 +80,6 @@ class Reservations extends Component {
                         {this.renderAlert()}               
 	               	</div>
                 </div>
-                {this.props.loading &&
-                    <Loader />
-                }
             </div>
 		);
 	}
@@ -92,9 +89,6 @@ class Reservations extends Component {
 function mapStateToProps(state) {
 	return {
 		reservations: state.reservations.reservations,
-        successMessage: state.auth.success,
-        errorMessage: state.auth.error,
-        loading: state.auth.loading,
         lang: state.i18n
 	};
 }

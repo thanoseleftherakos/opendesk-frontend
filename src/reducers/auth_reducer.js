@@ -1,10 +1,7 @@
 import {
 	AUTH_USER,
 	UNAUTH_USER,
-	AUTH_ERROR,
-	REQUEST_SUCCESS,
-	REQUEST_ERROR,
-	LOADING
+	AUTH_ERROR
 } from '../actions/types';
 
 export default function (state = {}, action) {
@@ -15,12 +12,6 @@ export default function (state = {}, action) {
 			return { ...state, authenticated: false };
 		case AUTH_ERROR:
 			return { ...state, error: action.payload };
-		case REQUEST_ERROR:
-			return { ...state, error: action.payload };
-		case REQUEST_SUCCESS:
-			return { ...state, error: '', success: action.payload.data };
-		case LOADING:
-			return { ...state, loading: action.payload };
 	}
 
 	return state;
