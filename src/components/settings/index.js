@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, addArrayValue } from 'redux-form';
 import { Link } from 'react-router';
 import TextInput from './../UI/forms/textinput';
 import SelectOption from './../UI/forms/selectoption';
 import DatePickerField from './../UI/forms/datepicker';
-import {checkAvailability} from '../../actions/availabilityActions';
-import {roomTypes} from '../../actions/index';
+import { settings } from '../../actions/index';
 import moment from "moment";
 import Loader from './../UI/loader';
 import Alert from '../UI/alerts';
 import ReservationsTable from './../UI/reservations_table';
 import { I18n } from 'react-redux-i18n';
 
-class Availability extends Component { 
+class Settings extends Component { 
     
     componentWillMount(){
-        if(!this.props.room_types){
-            this.props.roomTypes();
+        if(!this.props.hotel_settings){
+            this.props.settings();
         }
     }
     componentDidUpdate(){
@@ -25,58 +24,66 @@ class Availability extends Component {
         Layout.init();
     }
 	handleFormSubmit(formProps) {
-        this.props.checkAvailability(formProps);
+        console.log(formProps);
     }
-    renderDate(availability, status){
-        if(this.props.availability_status == "error") {
-            return availability.map((data) => (
-                <p key={data.date}>{data.date} - {I18n.t('general.booked_rooms', { count:data.sum })}</p>
-            ));
-        }
-        return availability.map((data) => (
-            <p key={data.date}>{data.date} - {I18n.t('general.free_rooms', { count:data.sum })}</p>
-        ));
-    }
+    // renderRoomTypes(types){
+    //     return types.map((type, index) => (
+    //             <p>{type.name}</p>
+    //         ));
+    // }
+
 
 	render() {
-		const { handleSubmit, fields: { check_in, check_out, room_type_id } } = this.props;
-        if(!this.props.room_types) {
+		const { handleSubmit, fields: { name, email, total_rooms, room_types} } = this.props;
+        if(!this.props.hotel_settings) {
             return <Loader /> 
         }
+
 		return(
 			<div>
-                <h1 className="page-title">{I18n.t('general.check_availability')}</h1>
+                <h1 className="page-title">{I18n.t('general.settings')}</h1>
                 <div className="row">
 	                <div className="col-md-12">
-						<div className="note note-info">
-                            <div className="filters-container">
-								<form role="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                                    <SelectOption name={I18n.t('general.type')} data={room_type_id} options={this.props.room_types} />
-									<DatePickerField 
-                                            name={I18n.t('general.from')} 
-                                            startDate={moment(check_in.value)} 
-                                            endDate={moment(check_out.value)} 
-                                            selected={moment(check_in.value)} 
-                                            data={check_in}/>
-                                        <DatePickerField 
-                                            name={I18n.t('general.to')}  
-                                            startDate={moment(check_in.value)} 
-                                            endDate={moment(check_out.value)} 
-                                            selected={moment(check_out.value)}
-                                            data={check_out}/>
-									<div className="clearfix"></div>
-									<button type="submit" className="btn btn-success">{I18n.t('general.search')} </button>
-								</form>
+                        <div className="portlet light bordered">
+                            <div className="portlet-title">
+                                <div className="caption font-green">
+                                    <i className="icon-settings font-green"></i>
+                                    <span className="caption-subject bold uppercase"> {I18n.t('general.edit_hotel')}</span>
+                                </div>
                             </div>
-                        </div>	
-                        {this.props.availability_status &&
-                            <div className={"note note-" + this.props.availability_status}>
-                                <h4 className="block">
-                                    {this.props.availability_status== "success" ? I18n.t('general.you_have_available_rooms') : I18n.t('general.no_available_rooms') }
-                                </h4>
-                                {this.renderDate(this.props.availability, this.props.availability_status)}
+                            <div className="portlet-body form">
+                                <form role="form" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+                                    <div className="form-body">
+                                        <TextInput type="text" name={I18n.t('forms.name')} data={name} />
+                                        <TextInput type="email" name={I18n.t('forms.email')} data={email} />
+                                        <TextInput type="number" name={I18n.t('forms.total_rooms')} disabled="true" data={total_rooms} />
+                                        <br/>
+                                        <h4 className="form-section">{I18n.t('forms.room_types')}</h4>
+                                        {room_types.map((type, index) => 
+                                            <div>
+                                                <TextInput type="text" name={I18n.t('forms.name')} data={type.name} />
+                                                <TextInput type="text" name={I18n.t('forms.amount')} data={type.amount} />
+                                                <button type="button" onClick={() => {
+                                                    room_types.removeField(index)  // remove from index
+                                                  }}><i/> Remove
+                                                  </button>
+                                            </div>
+                                        )}
+                  
+                                        <button type="button" onClick={() => {
+                                            room_types.addField();    // pushes empty child field onto the end of the array
+                                            }}><i/> {I18n.t('forms.add_room_type')}
+                                        </button>
+        
+                                        <div className="form-actions noborder">
+                                            <button type="submit" className="btn blue">{I18n.t('forms.update')}</button>
+                                        </div>
+
+                                        
+                                    </div>
+                                </form>
                             </div>
-                        }         
+                        </div>
 	               	</div>
                 </div>
             </div>
@@ -87,9 +94,8 @@ class Availability extends Component {
 
 function mapStateToProps(state) {
 	return {
-        room_types: state.general.room_types,
-        availability: state.general.availability,
-        availability_status: state.general.availability_status,
+        hotel_settings: state.general.settings,
+        initialValues: state.general.settings,
         lang: state.i18n
 	};
 }
@@ -98,12 +104,6 @@ function mapStateToProps(state) {
 export default reduxForm({
     
     form: 'edit_reservation',
-    fields: ['check_in', 'check_out', 'room_type_id'],
-    enableReinitialize: true,
-    initialValues: {
-        check_in: moment().format('YYYY/MM/DD'),
-        check_out: moment().add(1, 'days').format('YYYY/MM/DD')
+    fields: ['name', 'email', 'total_rooms', 'room_types[].name', 'room_types[].amount', 'children']
 
-    }
-
-}, mapStateToProps, { checkAvailability, roomTypes })(Availability);
+}, mapStateToProps, { settings })(Settings);

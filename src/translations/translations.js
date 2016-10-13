@@ -56,7 +56,8 @@ module.exports = {
       you_have_available_rooms: 'You have the following available rooms for the given dates:',
       no_available_rooms: 'Your hotel is fully booked for the following dates:',
       booked_rooms: '%{count} rooms',
-      booked_rooms_1: '%{count} room'
+      booked_rooms_1: '%{count} room',
+      edit_hotel: 'Edit hotel setting'
     },
     forms: {
       name: 'Name',
@@ -142,7 +143,9 @@ module.exports = {
       booked_rooms: '%{count} δωμάτια',
       booked_rooms_1: '%{count} δωμάτιο',
       dashboard_date: 'Αλλαγή ημ/νίας',
-      settings: 'Ρυθμίσεις'
+      settings: 'Ρυθμίσεις',
+      edit_hotel: 'Επεξεργασία στοιχείων',
+      language: 'Γλωσσα',
       
 
     },
@@ -162,7 +165,9 @@ module.exports = {
       status: 'Κατάσταση',
       notes: 'Σημειώσεις',
       create: 'Δημιουργία',
-      update: 'Ανανεωση'
+      update: 'Ανανεωση',
+      total_rooms: 'Συνολικά δωμάτια',
+      room_types: "Τύποι δωματίων"
     },
     date: {
       long: 'D MMMM YYYY'

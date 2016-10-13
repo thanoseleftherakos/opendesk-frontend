@@ -125,8 +125,8 @@ class CreateReservation extends Component {
 function mapStateToProps(state) {
 	return {
 		reservation: state.reservations.reservationformparams,
-		successMessage: state.auth.success,
-        errorMessage: state.auth.error,
+		successMessage: state.general.success,
+        errorMessage: state.general.error,
         lang: state.i18n,
         initialValues: {
             check_in : moment().format('YYYY/MM/DD'),

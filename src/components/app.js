@@ -8,6 +8,7 @@ import moment from "moment";
 import { changeLanguage } from '../actions';
 import Alert from './UI/alerts';
 import Loader from './UI/loader';
+import { I18n } from 'react-redux-i18n';
 
 class App extends Component {
     componentWillMount() {
@@ -51,7 +52,7 @@ class App extends Component {
                                         <span className="thin uppercase hidden-xs">{moment().format('dddd DD MMMM Y')}</span>&nbsp;
                                     </div>
                                     <div className="btn-group pull-right">
-                                        <button type="button" className="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Language
+                                        <button type="button" className="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> {I18n.t('general.language')}
                                             <i className="fa fa-angle-down"></i>
                                         </button>
                                         <ul className="dropdown-menu pull-right" role="menu" style={{ 'minWidth':'74px' }}>

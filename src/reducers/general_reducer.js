@@ -1,4 +1,4 @@
-import { ROOM_TYPES, CHECK_AVAILABILITY, LOADING, REQUEST_SUCCESS, REQUEST_ERROR } from '../actions/types';
+import { ROOM_TYPES, CHECK_AVAILABILITY, LOADING, REQUEST_SUCCESS, REQUEST_ERROR, SETTINGS } from '../actions/types';
 
 
 export default function (state = { availability:null, availability_status:'' }, action) {
@@ -13,6 +13,8 @@ export default function (state = { availability:null, availability_status:'' }, 
 			return { ...state, error: action.payload };
 		case REQUEST_SUCCESS:
 			return { ...state, error: '', success: action.payload };
+		case SETTINGS:
+			return { ...state, settings: action.payload.data };	
 	 default: return state;
 	}
 
