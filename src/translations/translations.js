@@ -145,7 +145,7 @@ module.exports = {
       dashboard_date: 'Αλλαγή ημ/νίας',
       settings: 'Ρυθμίσεις',
       edit_hotel: 'Επεξεργασία στοιχείων',
-      language: 'Γλωσσα',
+      language: 'Γλωσσα'
       
 
     },
@@ -167,7 +167,9 @@ module.exports = {
       create: 'Δημιουργία',
       update: 'Ανανεωση',
       total_rooms: 'Συνολικά δωμάτια',
-      room_types: "Τύποι δωματίων"
+      room_types: "Τύποι δωματίων",
+      required: 'Απαραίτητο',
+      invalid_email_address: 'Λάθος διεύθυνση email'
     },
     date: {
       long: 'D MMMM YYYY'

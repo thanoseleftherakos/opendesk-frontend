@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class TextInput extends Component {
 
 	render(){
-		console.log(this.props.disabled);
 		return (
 			<div className={"form-group form-md-line-input " + ((this.props.data.error && this.props.data.touched) ? 'has-error' : '')}>
                 <input 
