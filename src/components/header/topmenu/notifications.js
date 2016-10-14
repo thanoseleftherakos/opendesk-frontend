@@ -1,8 +1,27 @@
 import React, {Component} from 'react';
-
+import { connect } from 'react-redux';
+import Loader from './../../UI/loader';
+import _ from 'lodash';
 
 class Notifications extends Component {
+    renderNotifications(){
+
+        console.log(this.props.dashboard);
+        var room_numbers = new Array();
+        this.props.dashboard.current_rooms.forEach(function(room) {
+            room_numbers.push(room.room_number);
+        });
+        console.log(this.hasDuplicates(room_numbers));
+
+    }
+    hasDuplicates(a) {
+        return _.uniq(a).length !== a.length; 
+    }
 	render() {
+        if(!this.props.dashboard){
+            return <span></span>
+        }
+
 		return (
 			<li className="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                 <a href="javascript:;" className="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -29,9 +48,16 @@ class Notifications extends Component {
                         </ul>
                     </li>
                 </ul>
+                {this.renderNotifications()}
             </li>
 		);
 	}
 }
 
-export default Notifications;
+function mapStateToProps(state) {
+    return { 
+        dashboard: state.dashboard.dashboard
+    };
+}
+
+export default connect(mapStateToProps)(Notifications);
