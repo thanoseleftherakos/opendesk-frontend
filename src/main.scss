@@ -15,7 +15,7 @@ body{
 		margin:0px;
 		padding:0px;
 		input{
-			min-width: 200px;
+			min-width: 205px;
     		text-align: right;
 		}
 	}
@@ -111,3 +111,6 @@ $width: 100px;
     stroke: $yellow;
   }
 }
+
+
+.btn.top { margin-top:10px;}

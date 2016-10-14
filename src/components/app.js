@@ -5,14 +5,14 @@ import Footer from './footer/footer';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import moment from "moment";
-import { changeLanguage } from '../actions';
+import { changeLanguage,  requestSuccess, requestError  } from '../actions';
 import Alert from './UI/alerts';
 import Loader from './UI/loader';
 import { I18n } from 'react-redux-i18n';
 
 class App extends Component {
     componentWillMount() {
-        console.log(this.props.location.pathname);
+        
         // if(this.props.location.pathname == "/") {
         //     browserHistory.push('/dashboard');
         // }     
@@ -22,20 +22,30 @@ class App extends Component {
     }
 
     renderAlert() {
+        
         if (this.props.errorMessage) {
+            window.scrollTo(0, 0);
             return (
-                <Alert type="danger" icon="warning" message={this.props.errorMessage} />
+                <Alert type="danger" icon="warning" message={this.props.errorMessage} dismiss={() => this.dismissAlert('danger')} />
             );
         }
         if(this.props.successMessage) {
-         return (
-                <Alert type="success" icon="check" message={this.props.successMessage} />
+            window.scrollTo(0, 0);
+            return (
+                <Alert type="success" icon="check" message={this.props.successMessage} dismiss={() => this.dismissAlert('success')} />
             );   
         }
     }
+    dismissAlert(type){
+        if(type=='success'){
+            this.props.requestSuccess('');
+            
+        } else if(type=='error'){ 
+            this.props.requestError('');
+        }
 
+    }
 
-   
     render() {
         return (
             <div>
@@ -92,5 +102,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { changeLanguage })(App);
+export default connect(mapStateToProps, { changeLanguage, requestSuccess, requestError })(App);
 

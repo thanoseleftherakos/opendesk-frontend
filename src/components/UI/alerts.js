@@ -5,7 +5,7 @@ class Alert extends Component {
 
     return (
 		<div className={'custom-alerts alert fade in alert-' + this.props.type}>
-			<button type="button" className="close" data-dismiss="alert" aria-hidden="true"></button>
+			<button type="button" className="close"  aria-hidden="true" onClick={this.props.dismiss}></button>
 			<i className={'fa-lg fa fa-' + this.props.icon}></i> {this.props.message}
 		</div>
     );

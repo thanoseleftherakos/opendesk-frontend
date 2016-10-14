@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { FETCH_RESERVATION, FETCH_RESERVATION_FORM_PARAMS, FETCH_RESERVATIONS, REMOVE_RESERVATION, LOADING, REQUEST_ERROR, REQUEST_SUCCESS } from './types';
+import { requestSuccess, requestError } from './index';
 
 const ROOT_URL = 'http://dev.webf8.net/hotelapi/public';
 
@@ -133,16 +134,3 @@ export function fetchReservations(formData) {
 	};
 }
 
-
-export function requestError(error) {
-	return {
-		type: REQUEST_ERROR,
-		payload: error
-	};
-}
-export function requestSuccess(message) {
-	return {
-		type: REQUEST_SUCCESS,
-		payload: message
-	};
-}

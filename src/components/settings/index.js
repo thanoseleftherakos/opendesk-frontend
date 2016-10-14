@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import TextInput from './../UI/forms/textinput';
 import SelectOption from './../UI/forms/selectoption';
 import DatePickerField from './../UI/forms/datepicker';
-import { settings } from '../../actions/index';
+import { fetchSettings, updateSettings } from '../../actions/settingsActions';
 import moment from "moment";
 import Loader from './../UI/loader';
 import Alert from '../UI/alerts';
@@ -16,7 +16,7 @@ class Settings extends Component {
     
     componentWillMount(){
         if(!this.props.hotel_settings){
-            this.props.settings();
+            this.props.fetchSettings();
         }
     }
     componentDidUpdate(){
@@ -24,11 +24,11 @@ class Settings extends Component {
         Layout.init();
     }
 	handleFormSubmit(formProps) {
-        
+        this.props.updateSettings(formProps);
     }
 
 	render() {
-		const { handleSubmit, submitting, fields: { name, email, total_rooms, room_types} } = this.props;
+		const { handleSubmit, submitting, fields: { name, email, total_rooms, room_types, deleted} } = this.props;
         if(!this.props.hotel_settings) {
             return <Loader /> 
         }
@@ -52,23 +52,37 @@ class Settings extends Component {
                                         <TextInput type="email" name={I18n.t('forms.email')} data={email} />
                                         <TextInput type="number" name={I18n.t('forms.total_rooms')} disabled="true" data={total_rooms} />
                                         <br/>
-                                        <h4 className="form-section">{I18n.t('forms.room_types')}</h4>
-                                        {room_types.map((type, index) => 
-                                            <div key={type.name + index}>
-                                                <TextInput type="text" name={I18n.t('forms.name')} data={type.name} />
-                                                <TextInput type="number" name={I18n.t('forms.amount')} data={type.amount} />
-                                                <button type="button" onClick={() => {
-                                                    room_types.removeField(index)  // remove from index
-                                                  }}><i/> Remove
-                                                  </button>
+                                        <div className="portlet light bg-inverse">
+                                            <div className="portlet-title">
+                                                <div className="caption font-green">
+                                                    <span className="caption-subject bold uppercase"> {I18n.t('forms.room_types')}</span>
+                                                </div>
                                             </div>
-                                        )}
-                  
-                                        <button type="button" onClick={() => {
-                                            room_types.addField();    // pushes empty child field onto the end of the array
-                                            }}><i/> {I18n.t('forms.add_room_type')}
-                                        </button>
-        
+                                            <TextInput type="hidden" name='' data={deleted} />
+                                            {room_types.map((type, index) => 
+                                                <div key={type.name + index} className="row">
+                                                    <input type="hidden" name='id' value={type.id.value} />
+                                                    <div className="col-xs-4">
+                                                        <TextInput type="text" name={I18n.t('forms.name')} data={type.name} />
+                                                    </div>
+                                                    <div className="col-xs-4">
+                                                        <TextInput type="number" name={I18n.t('forms.amount')} data={type.amount} />
+                                                    </div>
+                                                    <div className="col-xs-4">
+                                                        <button type="button" className="btn red top btn-icon-only" onClick={() => {
+                                                            room_types.removeField(index); // remove from index
+                                                            (type.id.value ? deleted.addField({id: type.id.value}) : '');
+                                                          }}><i className="icon-close"/>
+                                                          </button>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <br/>
+                                            <button type="button" className="btn green-haze" onClick={() => {
+                                                room_types.addField({name:'', amount:''});    // pushes empty child field onto the end of the array
+                                                }}><i className="icon-plus"></i>{I18n.t('forms.add_room_type')}
+                                            </button>
+                                        </div>
                                         <div className="form-actions noborder">
                                             <button type="submit" disabled={submitting} className="btn blue">
                                                 {I18n.t('forms.update')}
@@ -90,8 +104,8 @@ class Settings extends Component {
 
 function mapStateToProps(state) {
 	return {
-        hotel_settings: state.general.settings,
-        initialValues: state.general.settings,
+        hotel_settings: state.hotel_settings.settings,
+        initialValues: state.hotel_settings.settings,
         lang: state.i18n
 	};
 }
@@ -141,7 +155,7 @@ function validate(formProps) {
 export default reduxForm({
     
     form: 'edit_reservation',
-    fields: ['name', 'email', 'total_rooms', 'room_types[].name', 'room_types[].amount'],
+    fields: ['name', 'email', 'total_rooms', 'room_types[].id', 'room_types[].name', 'room_types[].amount', 'deleted[].id'],
     validate
 
-}, mapStateToProps, { settings })(Settings);
+}, mapStateToProps, { fetchSettings, updateSettings })(Settings);

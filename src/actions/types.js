@@ -13,4 +13,7 @@ export const LOADING = 'loading';
 export const CHANGE_LANGUAGE = 'language';
 export const CHECK_AVAILABILITY = 'check_availability';
 export const ROOM_TYPES = 'room_types';
-export const SETTINGS = 'hotel_settings';
+export const FETCH_SETTINGS = 'hotel_settings';
+export const UPDATE_SETTINGS = 'update_hotel_settings';
+
+export const FETCH_USER_PROFILE = 'user_profile';

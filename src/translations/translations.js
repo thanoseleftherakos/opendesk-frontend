@@ -165,11 +165,12 @@ module.exports = {
       status: 'Κατάσταση',
       notes: 'Σημειώσεις',
       create: 'Δημιουργία',
-      update: 'Ανανεωση',
+      update: 'Αποθηκευση',
       total_rooms: 'Συνολικά δωμάτια',
       room_types: "Τύποι δωματίων",
       required: 'Απαραίτητο',
-      invalid_email_address: 'Λάθος διεύθυνση email'
+      invalid_email_address: 'Λάθος διεύθυνση email',
+      add_room_type: 'Προθηκη Δωματιου'
     },
     date: {
       long: 'D MMMM YYYY'
