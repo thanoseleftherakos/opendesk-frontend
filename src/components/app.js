@@ -6,16 +6,14 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import moment from "moment";
 import { changeLanguage,  requestSuccess, requestError  } from '../actions';
+import { fetchUserProfile } from '../actions/userProfileActions';
 import Alert from './UI/alerts';
 import Loader from './UI/loader';
 import { I18n } from 'react-redux-i18n';
 
 class App extends Component {
     componentWillMount() {
-        
-        // if(this.props.location.pathname == "/") {
-        //     browserHistory.push('/dashboard');
-        // }     
+        this.props.fetchUserProfile();
     }
     switchLang(lang){
         this.props.changeLanguage(lang);
@@ -102,5 +100,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { changeLanguage, requestSuccess, requestError })(App);
+export default connect(mapStateToProps, { changeLanguage, requestSuccess, requestError, fetchUserProfile })(App);
 

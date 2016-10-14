@@ -1,13 +1,12 @@
 import {
-	FETCH_SETTINGS,
-	UPDATE_SETTINGS
+	FETCH_USER_PROFILE
 } from '../actions/types';
 
 export default function (state = {}, action) {
 
 	switch(action.type) {
-		case FETCH_SETTINGS:
-			return { ...state, settings: action.payload.data };	
+		case FETCH_USER_PROFILE:
+			return { ...state, profile: action.payload.data };	
 	}
 
 	return state;
