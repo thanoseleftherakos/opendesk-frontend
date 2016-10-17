@@ -12,6 +12,7 @@ import EditReservation from './components/reservations/edit';
 import CreateReservation from './components/reservations/create';
 import Availability from './components/availability/index';
 import Settings from './components/settings/index';
+import Profile from './components/user/profile';
 
 import requiereAuth from './components/require_auth';
 
@@ -27,6 +28,7 @@ export default (
 			<Route path="reservation/create" component={CreateReservation} />
 			<Route path="availability" component={Availability} />
 			<Route path="settings" component={Settings} />
+			<Route path="user" component={Profile} />
 		</Route>
 		<Route path="/login" component={Login} />
 	</Route>

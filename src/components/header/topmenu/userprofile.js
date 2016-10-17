@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../actions/authActions';
+import { Link } from 'react-router'
 import Loader from '../../UI/loader';
 
 class UserProfile extends Component {
@@ -16,8 +17,9 @@ class UserProfile extends Component {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-default">
                     <li>
-                        <a href="page_user_profile_1.html">
-                            <i className="icon-user"></i> My Profile </a>
+                    <Link to={"/hotel/user"} className="">
+                        <i className="icon-user"></i> My Profile
+                    </Link>
                     </li>
                     <li>
                         <a href="javascript:;" onClick={() => this.props.logoutUser()} >

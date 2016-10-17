@@ -160,6 +160,10 @@ function validate(formProps) {
     if (!formProps.status_id) {
         errors.status_id = 'Please select a room status';
     }
+    if (formProps.client_email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formProps.client_email)) {
+        errors.client_email = 'Invalid email address';
+    }
+
     let check_out = moment(formProps.check_out);
     let check_in = moment(formProps.check_in);
     if(check_out <= check_in) {
