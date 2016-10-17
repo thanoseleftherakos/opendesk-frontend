@@ -17,7 +17,7 @@ class ReservationsTableRow extends Component {
             <td> {this.props.data.country} </td>
             <td> { moment(this.props.data.check_in).format('dddd DD MMMM YY') } </td>
             <td> { moment(this.props.data.check_out).format('dddd DD MMMM YY') } </td>
-            <td> { this.props.data.status_type.type } </td>
+            <td> { this.props.data.status_type.name } </td>
             <td className="numeric"> { this.props.data.price } </td>
             <td> { this.props.data.room.name } </td>
             <td> { this.props.data.channel.name } </td>

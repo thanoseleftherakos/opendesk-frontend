@@ -94,6 +94,21 @@ function mapStateToProps(state) {
 	};
 }
 
+function validate(formProps) {
+    const errors = {};
+
+    if (!formProps.room_type_id) {
+        errors.room_type_id = 'Please select a type';
+    }
+    let check_out = moment(formProps.check_out);
+    let check_in = moment(formProps.check_in);
+    if(check_out <= check_in) {
+        errors.check_out = 'Checkout must be after checkout';
+    }
+
+
+    return errors;
+}
 
 export default reduxForm({
     
@@ -104,6 +119,7 @@ export default reduxForm({
         check_in: moment().format('YYYY/MM/DD'),
         check_out: moment().add(1, 'days').format('YYYY/MM/DD')
 
-    }
+    },
+    validate
 
 }, mapStateToProps, { checkAvailability, roomTypes })(Availability);

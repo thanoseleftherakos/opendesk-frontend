@@ -17,6 +17,7 @@ class SingleReservation extends Component {
 		return new_date;
 	}
     removeReservation(){
+        console.log(this.props.params.id)
         this.props.removeReservation(this.props.params.id);
     }
 
@@ -45,10 +46,10 @@ class SingleReservation extends Component {
                                     <span className="caption-subject font-green bold uppercase">{this.props.reservation.room.name}</span>
                                 </div>
                                 <div className="actions">
-                                    <Link to={`/hotel/reservations/edit/${this.props.reservation.id}`} className="btn btn-circle btn-icon-only btn-default">
+                                    <Link to={`/hotel/reservations/edit/${this.props.reservation.id}`} className="btn btn-circle btn-icon-only btn-default yellow-crusta">
                                         <i className="icon-pencil"></i>
                                     </Link>
-                                    <a className="btn btn-circle btn-icon-only btn-default" href="javascript:;" onClick={this.removeReservation.bind(this)}>
+                                    <a className="btn btn-circle btn-icon-only btn-default red" href="javascript:;" onClick={this.removeReservation.bind(this)}>
                                         <i className="icon-trash"></i>
                                     </a>
                                 </div>

@@ -38,7 +38,7 @@ class App extends Component {
         if(type=='success'){
             this.props.requestSuccess('');
             
-        } else if(type=='error'){ 
+        } else if(type=='danger'){ 
             this.props.requestError('');
         }
 

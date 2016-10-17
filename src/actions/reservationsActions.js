@@ -83,10 +83,10 @@ export function removeReservation(id) {
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 		})
 		.then(response => {
+			dispatch(requestSuccess(response.data.message)); 
 			dispatch({ 
 				type: REMOVE_RESERVATION,
-				payload: response.data,
-				id
+				payload: response.data
 			});
 			browserHistory.push('/hotel/reservations');
 
