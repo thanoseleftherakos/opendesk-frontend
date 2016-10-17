@@ -29,6 +29,7 @@ export function fetchSettings() {
 
 export function updateSettings(formData) {
 	return function (dispatch) {
+		console.log(formData.logo);
 		dispatch({ type: LOADING, payload: true });
 		axios.post(`${ROOT_URL}/settings`, formData, {
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }

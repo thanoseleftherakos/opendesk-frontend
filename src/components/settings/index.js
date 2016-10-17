@@ -28,11 +28,11 @@ class Settings extends Component {
     }
 
 	render() {
-		const { handleSubmit, submitting, fields: { name, email, total_rooms, room_types, deleted} } = this.props;
+		const { handleSubmit, submitting, fields: { name, email, total_rooms, room_types, deleted, logo } } = this.props;
         if(!this.props.hotel_settings) {
             return <Loader /> 
         }
-
+        console.log(logo);
 		return(
 			<div>
                 <h1 className="page-title">{I18n.t('general.settings')}</h1>
@@ -51,6 +51,7 @@ class Settings extends Component {
                                         <TextInput type="text" name={I18n.t('forms.name')} data={name} />
                                         <TextInput type="email" name={I18n.t('forms.email')} data={email} />
                                         <TextInput type="number" name={I18n.t('forms.total_rooms')} disabled="true" data={total_rooms} />
+                                        <input type="file" {...logo} value={ null } />
                                         <br/>
                                         <div className="portlet light bg-inverse">
                                             <div className="portlet-title">
@@ -155,7 +156,7 @@ function validate(formProps) {
 export default reduxForm({
     
     form: 'edit_reservation',
-    fields: ['name', 'email', 'total_rooms', 'room_types[].id', 'room_types[].name', 'room_types[].amount', 'deleted[].id'],
+    fields: ['name', 'email', 'total_rooms', 'logo', 'room_types[].id', 'room_types[].name', 'room_types[].amount', 'deleted[].id'],
     validate
 
 }, mapStateToProps, { fetchSettings, updateSettings })(Settings);

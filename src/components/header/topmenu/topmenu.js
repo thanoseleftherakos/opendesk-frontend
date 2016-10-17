@@ -7,6 +7,9 @@ class Topmenu extends Component {
 		return (
 			<div className="page-top">
 				<div className="top-menu">
+				<ul className="nav navbar-nav pull-left hotel-logo">
+				<li><img src="" alt=""/></li>
+				</ul>
 	                <ul className="nav navbar-nav pull-right">
 	                    <Notifications />
 	                    <UserProfile />
