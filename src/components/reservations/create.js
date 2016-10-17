@@ -40,11 +40,6 @@ class CreateReservation extends Component {
             );   
         }
     }
-    renderStatusTypes(){
-        return this.props.reservation.status_types.map((data, index) => (
-                <option key={data.id} value={data.id}>{data.type}</option>
-            ));
-    }
 
 	render(){
 		if(!this.props.reservation) {
@@ -99,13 +94,7 @@ class CreateReservation extends Component {
                                         {(channel_id.value!=4 && channel_id.value!=5) &&
                                             <TextInput type="text" name="Ref.id" data={ref_id} />                                     
                                         }                                   
-                                        <div className="form-group form-md-line-input">
-                                            <select className="form-control" {...status_id}>
-                                                <option value="">Select</option>
-                                                {this.renderStatusTypes()}
-                                            </select>
-                                            <label htmlFor="form_control_1">{I18n.t('forms.status')}</label>
-                                        </div>
+                                        <SelectOption name={I18n.t('forms.status')} data={status_id} options={this.props.reservation.status_types} />
                                         <Textarea name={I18n.t('forms.notes')} data={notes}/>
                                     </div>
                                     {this.renderAlert()}
@@ -129,6 +118,9 @@ function mapStateToProps(state) {
         errorMessage: state.general.error,
         lang: state.i18n,
         initialValues: {
+            persons: 2,
+            channel_id: 5,
+            status_id: 1,
             check_in : moment().format('YYYY/MM/DD'),
             check_out : moment().format('YYYY/MM/DD')
         }
@@ -167,11 +159,14 @@ function validate(formProps) {
     if (!formProps.channel_id) {
         errors.channel_id = 'Please select a channel';
     }
-
     if (!formProps.status_id) {
         errors.status_id = 'Please select a room status';
     }
-    
+    let check_out = moment(formProps.check_out);
+    let check_in = moment(formProps.check_in);
+    if(check_out <= check_in) {
+        errors.check_out = 'Checkout must be after checkout';
+    }
 
 
     return errors;

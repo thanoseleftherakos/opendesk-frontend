@@ -145,8 +145,8 @@ class SingleReservation extends Component {
                                             <tr>
                                                 <td> {I18n.t('forms.status')} </td>
                                                 <td>
-                                                	<span className={'label label-sm label-' + (this.props.reservation.status_type.type ? 'success' : 'danger')}>
-                                                 		{this.props.reservation.status_type.type}  <i className={'icon-' + (this.props.reservation.status_type.type ? 'check' : 'close')} ></i>
+                                                	<span className={'label label-sm label-' + (this.props.reservation.status_type.id == 1 ? 'success' : 'danger')}>
+                                                 		{this.props.reservation.status_type.name}  <i className={'icon-' + (this.props.reservation.status_type.id == 1 ? 'check' : 'close')} ></i>
                                                  	</span> 
                                                  </td> 
                                             </tr>

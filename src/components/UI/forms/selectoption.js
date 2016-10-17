@@ -13,6 +13,7 @@ class SelectOption extends Component {
 		return (
 			<div className={"form-group form-md-line-input " + ((this.props.data.error && this.props.data.touched) ? 'has-error' : '')}>
 	            <select className="form-control" {...this.props.data} >
+	            <option value="" disabled>Select</option>
 	                {this.renderOptions()}
 	            </select>
 	            <label htmlFor="form_control_1">{this.props.name}</label>

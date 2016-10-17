@@ -39,11 +39,6 @@ class EditReservation extends Component {
             );   
         }
     }
-    renderStatusTypes(){
-        return this.props.reservation.status_types.map((data, index) => (
-                <option key={data.id} value={data.id}>{data.type}</option>
-            ));
-    }
 
 	render(){
 		if(!this.props.reservation) {
@@ -105,13 +100,7 @@ class EditReservation extends Component {
                                         {(channel_id.value!=4 && channel_id.value!=5) &&
                                             <TextInput type="text" name="Ref.id" data={ref_id} />                                     
                                         }
-                                        <div className="form-group form-md-line-input">
-                                            <select className="form-control" {...status_id}>
-                                                <option value="">Select</option>
-                                                {this.renderStatusTypes()}
-                                            </select>
-                                            <label htmlFor="form_control_1">Status</label>
-                                        </div>
+                                        <SelectOption name={I18n.t('forms.status')} data={status_id} options={this.props.reservation.status_types} />
                                         <Textarea name={I18n.t('forms.notes')} data={notes}/>
                                     </div>
                                     {this.renderAlert()}
@@ -146,11 +135,35 @@ function validate(formProps) {
     if (!formProps.client_name) {
         errors.client_name = 'Please enter a name';
     }
+    if (!formProps.check_in) {
+        errors.check_in = 'Please enter a check in date';
+    }
+    if (!formProps.check_out) {
+        errors.check_out = 'Please enter a check out date';
+    }
 
-    if (!formProps.client_email) {
-        errors.client_email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formProps.client_email)) {
-        errors.client_email = 'Invalid email address';
+    if (!formProps.room_type_id) {
+        errors.room_type_id = 'Please select a room type';
+    }
+
+    if (!formProps.persons) {
+        errors.persons = 'Please select the number of persons';
+    }
+
+    if (!formProps.price) {
+        errors.price = 'Please give a price for the room';
+    }
+
+    if (!formProps.channel_id) {
+        errors.channel_id = 'Please select a channel';
+    }
+    if (!formProps.status_id) {
+        errors.status_id = 'Please select a room status';
+    }
+    let check_out = moment(formProps.check_out);
+    let check_in = moment(formProps.check_in);
+    if(check_out <= check_in) {
+        errors.check_out = 'Checkout must be after checkout';
     }
 
     return errors;
