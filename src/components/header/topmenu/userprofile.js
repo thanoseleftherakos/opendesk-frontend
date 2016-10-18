@@ -7,7 +7,7 @@ import Loader from '../../UI/loader';
 class UserProfile extends Component {
 	render() {
         if(!this.props.user) {
-            return <Loader />;
+            return <span></span>
         }
 		return (
 			<li className="dropdown dropdown-user">
