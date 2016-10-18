@@ -1,0 +1,19 @@
+.reservation_calendar {
+	table, th, td {
+		border:1px solid #eef1f5;
+	}
+	table{
+		width:100%;
+		tbody{
+			tr {
+				height:150px;
+				th{
+					text-align:left;
+				}
+			}
+		}
+		th{
+			text-align:center;
+		}
+	}
+}
