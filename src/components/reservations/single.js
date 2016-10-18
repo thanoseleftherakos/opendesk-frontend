@@ -20,6 +20,9 @@ class SingleReservation extends Component {
         console.log(this.props.params.id)
         this.props.removeReservation(this.props.params.id);
     }
+    componentDidMount(){
+        document.title = `Reservation`;
+    }
 
 	render() {
 		if(!this.props.reservation) {

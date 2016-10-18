@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-
 import LoginForm from './loginform';
 import SignupForm from './signupform';
 import ForgotForm from './forgotform';
 
 export default class Login extends Component {
-  render() {
-    return (
+    componentDidMount(){
+        document.title = "Login";
+    }
+    render() {
+        return (
             <div className="login">
                 <div className="logo">
                     <a href="index.html">
@@ -19,7 +21,7 @@ export default class Login extends Component {
                 </div>
                 <div className="copyright"> 2014 © Metronic. Admin Dashboard Template. </div>
         	</div>
-    );
-  }
+        );
+    }
 }
 

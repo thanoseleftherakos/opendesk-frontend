@@ -23,6 +23,9 @@ class Settings extends Component {
         App.init();
         Layout.init();
     }
+    componentDidMount(){
+        document.title = "Hotel Settings";
+    }
 	handleFormSubmit(formProps) {
         this.props.updateSettings(formProps);
     }
@@ -32,7 +35,6 @@ class Settings extends Component {
         if(!this.props.hotel_settings) {
             return <Loader /> 
         }
-        console.log(logo);
 		return(
 			<div>
                 <h1 className="page-title">{I18n.t('general.settings')}</h1>
@@ -51,6 +53,9 @@ class Settings extends Component {
                                         <TextInput type="text" name={I18n.t('forms.name')} data={name} />
                                         <TextInput type="email" name={I18n.t('forms.email')} data={email} />
                                         <TextInput type="number" name={I18n.t('forms.total_rooms')} disabled="true" data={total_rooms} />
+                                        {this.props.hotel_settings.logo && 
+                                            <img className="logo" src={this.props.hotel_settings.logo} alt=""/>
+                                        }
                                         <input type="file" {...logo} value={ null } />
                                         <br/>
                                         <div className="portlet light bg-inverse">

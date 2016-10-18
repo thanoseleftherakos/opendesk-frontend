@@ -19,6 +19,9 @@ class Reservations extends Component {
             this.fetchData();
         }
     }
+    componentDidMount(){
+        document.title = "Reservations";
+    }
     componentDidUpdate(){
         App.init();
         Layout.init();
