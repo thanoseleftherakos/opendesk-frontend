@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import {  REQUEST_ERROR, REQUEST_SUCCESS, CHANGE_LANGUAGE, ROOM_TYPES } from './types';
+import {  REQUEST_ERROR, REQUEST_SUCCESS, CHANGE_LANGUAGE, ROOM_TYPES, INIT } from './types';
 import { setLocale } from 'react-redux-i18n';
 import moment from "moment";
 import en from "moment/locale/en-gb";
@@ -53,4 +53,24 @@ export function roomTypes() {
 	};
 }
 
+export function initData(){
+	return function (dispatch) {
+		axios.get(`${ROOT_URL}/init`,  {
+			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+		})
+		.then(response => {
+			dispatch({ 
+				type: INIT,
+				payload: response.data
+			});
+		})
+		.catch(error => {
+			if(error.response.status == 401) {
+				localStorage.removeItem('token');
+				browserHistory.push('/login');	
+			}
+			
+		});
+	};
+}
 

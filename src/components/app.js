@@ -5,7 +5,7 @@ import Footer from './footer/footer';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import moment from "moment";
-import { changeLanguage,  requestSuccess, requestError  } from '../actions';
+import { changeLanguage,  requestSuccess, requestError, initData  } from '../actions';
 import { fetchUserProfile } from '../actions/userProfileActions';
 import Alert from './UI/alerts';
 import Loader from './UI/loader';
@@ -13,7 +13,7 @@ import { I18n } from 'react-redux-i18n';
 
 class App extends Component {
     componentWillMount() {
-        this.props.fetchUserProfile();
+        this.props.initData();
     }
     switchLang(lang){
         this.props.changeLanguage(lang);
@@ -100,5 +100,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { changeLanguage, requestSuccess, requestError, fetchUserProfile })(App);
+export default connect(mapStateToProps, { changeLanguage, requestSuccess, requestError, fetchUserProfile, initData })(App);
 

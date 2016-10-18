@@ -13,7 +13,6 @@ class Profile extends Component {
         Layout.init();
     }
     handleFormSubmit(formProps) {
-        console.log(formProps);
         this.props.updateUser(formProps);
     }
 
@@ -66,8 +65,8 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
     return {
-        userProfile: state.user.profile,
-        initialValues: state.user.profile,
+        userProfile: state.init.user,
+        initialValues: state.init.user,
         lang: state.i18n
     };
 }

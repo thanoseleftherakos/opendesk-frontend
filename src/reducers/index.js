@@ -6,6 +6,7 @@ import reservationsReducer from './reservations_reducer';
 import generalReducer from './general_reducer';
 import settingsReducer from './settings_reducer';
 import userReducer from './userprofile_reducer';
+import initReducer from './init_reducer';
 import { i18nReducer } from 'react-redux-i18n';
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
 	dashboard: dashboardReducer,
 	reservations: reservationsReducer,
 	general: generalReducer,
-	i18n: i18nReducer
+	i18n: i18nReducer,
+	init: initReducer
 });
 
 export default rootReducer;
