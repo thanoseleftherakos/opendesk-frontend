@@ -29,9 +29,19 @@ export function fetchSettings() {
 
 export function updateSettings(formData) {
 	return function (dispatch) {
-		console.log(formData.logo);
 		dispatch({ type: LOADING, payload: true });
-		axios.post(`${ROOT_URL}/settings`, formData, {
+		var data = new FormData();
+		console.log(formData);
+		for(var key in formData){
+			if(Array.isArray(formData[key])){
+				data.append(key, JSON.stringify(formData[key]));
+			} else {
+				data.append(key, formData[key]);
+			}
+		}
+        data.append('logo', formData.logo[0]);
+        console.log(data);
+		axios.post(`${ROOT_URL}/settings`, data, {
 			headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
 		})
 		.then(response => {
