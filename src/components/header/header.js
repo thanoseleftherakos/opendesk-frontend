@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Topmenu from './topmenu/topmenu';
+var logo = require('../../theme/opendesk_logo_white_small.png');
 
 class Header extends Component{
 	componentDidMount(){
@@ -10,9 +11,8 @@ class Header extends Component{
 			<div className="page-header navbar navbar-fixed-top">
 	            <div className="page-header-inner ">
 	                <div className="page-logo">
-	                    <a href="index.html">
-	                        <img src="" alt="logo" className="logo-default" /> </a>
-	                    <div className="menu-toggler sidebar-toggler"> </div>
+	                    <a href="/hotel/dashboard">
+	                        <img src={logo} alt="logo" className="logo-default" /> </a>
 	                </div>
 	                <a href="javascript:;" className="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
 	                <Topmenu />
