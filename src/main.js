@@ -20,8 +20,7 @@ import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-red
 const store = createStore(
   reducers,
   compose(
-    applyMiddleware(reduxThunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    applyMiddleware(reduxThunk)
   )
 );
 

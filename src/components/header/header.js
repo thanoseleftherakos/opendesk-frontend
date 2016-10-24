@@ -3,7 +3,7 @@ import Topmenu from './topmenu/topmenu';
 
 class Header extends Component{
 	componentDidMount(){
-		QuickSidebar.init();
+		// QuickSidebar.init();
 	}
 	render() {
 		return (

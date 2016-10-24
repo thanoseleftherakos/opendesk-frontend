@@ -1,26 +1,32 @@
 var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    devtool: 'eval-source-map',
+    
     entry: {
         main: './src/main.js'
     },
     output: {
-        filename: './dist/main.min.js'
+        path: path.join(__dirname, '/dist/'),
+        filename: '[name]-[hash].min.js',
+        publicPath: '/'
     },
     plugins: [
-        new WebpackCleanupPlugin(),
-        new WebpackCleanupPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            inject: 'body',
+            filename: 'index.html'
+        }),
+        new ExtractTextPlugin('[name]-[hash].min.css'),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
-                screw_ie8: true,
-                drop_console: true,
-                drop_debugger: true,
-                minimize: true
+                screw_ie8: true
             }
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.optimize.DedupePlugin()
     ],
@@ -37,9 +43,12 @@ module.exports = {
             },
             {
               test: /\.s?css$/,
-              loaders: ['style','css','sass'],
-              include:path.join(__dirname,'src')
-            }
+              loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
+            },
+            { test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+            { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, loader: 'file' },
+            { test: /\.png$/, loader: "url-loader?limit=100000" },
+            { test: /\.jpg$/, loader: "file-loader" }
         ]
     }
 };

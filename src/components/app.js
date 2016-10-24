@@ -11,6 +11,18 @@ import Alert from './UI/alerts';
 import Loader from './UI/loader';
 import { I18n } from 'react-redux-i18n';
 
+
+// import './../theme/global/plugins/bootstrap/js/bootstrap.min.js';
+// import './../theme/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js';
+// import './../theme/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js';
+// import './../theme/global/plugins/jquery.blockui.min.js';
+// import './../theme/global/plugins/uniform/jquery.uniform.min.js';
+// import './../theme/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js';
+// import './../theme/global/scripts/app.min.js';
+// import './../theme/pages/scripts/login.js';
+// import './../theme/layouts/layout/scripts/layout.min.js';
+// import './../theme/layouts/layout/scripts/demo.min.js';
+// import './../theme/layouts/global/scripts/quick-sidebar.min.js';
 class App extends Component {
     componentWillMount() {
         this.props.initData();

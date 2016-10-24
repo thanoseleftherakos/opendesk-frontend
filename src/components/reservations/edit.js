@@ -13,7 +13,7 @@ import Textarea from './../UI/forms/textarea';
 import countries from '../../data/countries';
 import { I18n } from 'react-redux-i18n';
 
-require('style!css!sass!react-datepicker/dist/react-datepicker.css'); 
+import 'react-datepicker/dist/react-datepicker.css';
 
 class EditReservation extends Component {
 	componentWillMount(){
