@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoginForm from './loginform';
 import SignupForm from './signupform';
 import ForgotForm from './forgotform';
-var logo = require('../../theme/opendesk_logo_white.png');
+var logo = require('../../theme/opendesk_logo_blue.png');
 
 export default class Login extends Component {
     componentDidMount(){
