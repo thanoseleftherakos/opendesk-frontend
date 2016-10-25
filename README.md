@@ -3,7 +3,7 @@
 opendesk is build using react and redux using [opendesk-api](https://github.com/thanoseleftherakos/opendesk-api)
 
 ###Online demo:
-[opendesk.online](https://opendesk.online)
+[opendesk.online](http://opendesk.online)
 ```bash
 username: demo
 password: demo
