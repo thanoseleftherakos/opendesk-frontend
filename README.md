@@ -36,3 +36,8 @@ To use webpack dev server & watch,
 ```
 
 Listens at **http://localhost:8080**
+
+
+### License
+
+[MIT license](http://opensource.org/licenses/MIT)
