@@ -11,9 +11,6 @@ export default function (ComposedComponent) {
 			if (!this.props.authenticated) {
 				this.context.router.push('/login');
 			} 
-			// else {
-			// 	this.context.router.push('/dashboard');
-			// }
 		}
 		componentWillUpdate(nextProps) {
 			if (!nextProps.authenticated) {

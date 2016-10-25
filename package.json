@@ -44,7 +44,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "scripts": {
-    "build": "rimraf dist && node_modules/.bin/webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "build": "rimraf dist/index.html && node_modules/.bin/webpack --config ./webpack.production.config.js --progress --profile --colors",
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --progress --colors --inline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

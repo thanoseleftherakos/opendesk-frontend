@@ -19,7 +19,7 @@ import requiereAuth from './components/require_auth';
 
 export default ( 
 	<Route path="/">
-	<IndexRoute component={Main} />
+	<IndexRedirect to='/login' />
 		<Route path="/hotel" component={requiereAuth(App)}>
 			<IndexRedirect to="/hotel/dashboard" />
 			<Route name='dashboard' path="dashboard" component={Dashboard} />
