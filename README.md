@@ -1,8 +1,13 @@
-# React Hotel Reservation App
+![opendesk logo](http://dev.webf8.net/opendesk_logo_blue.png)
+# opendesk - open source hotel reservation manager
+opendesk is build using react and redux using [opendesk-api](https://github.com/thanoseleftherakos/opendesk-api)
 
-A simple hello world using react, webpack, babel, es2015 & sass.
-
-Compiles all the scripts & styles from `src` path to `dist`. The kit generates source maps by default in development mode.
+###Online demo:
+[opendesk.online](https://opendesk.online)
+```bash
+username: demo
+password: demo
+```
 
 ##Installation
 
