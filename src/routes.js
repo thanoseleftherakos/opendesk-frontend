@@ -14,6 +14,7 @@ import Availability from './components/availability/index';
 import Settings from './components/settings/index';
 import Profile from './components/user/profile';
 import Calendar from './components/calendar/index';
+import Stats from './components/stats/index';
 
 import requiereAuth from './components/require_auth';
 
@@ -31,6 +32,7 @@ export default (
 			<Route path="settings" component={Settings} />
 			<Route path="user" component={Profile} />
 			<Route path="calendar" component={Calendar} />
+			<Route path="stats" component={Stats} />
 		</Route>
 		<Route path="/login" component={Login} />
 	</Route>

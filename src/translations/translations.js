@@ -145,7 +145,8 @@ module.exports = {
       dashboard_date: 'Αλλαγή ημ/νίας',
       settings: 'Ρυθμίσεις',
       edit_hotel: 'Επεξεργασία στοιχείων',
-      language: 'Γλωσσα'
+      language: 'Γλωσσα',
+      statistics: 'Στατιστικά'
       
 
     },

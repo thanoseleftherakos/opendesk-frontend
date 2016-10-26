@@ -7,6 +7,7 @@ import generalReducer from './general_reducer';
 import settingsReducer from './settings_reducer';
 import userReducer from './userprofile_reducer';
 import initReducer from './init_reducer';
+import statsReducer from './stats_reducer';
 import { i18nReducer } from 'react-redux-i18n';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
 	user: userReducer,
 	dashboard: dashboardReducer,
 	reservations: reservationsReducer,
+	statistics: statsReducer,
 	general: generalReducer,
 	i18n: i18nReducer,
 	init: initReducer

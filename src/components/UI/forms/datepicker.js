@@ -16,6 +16,9 @@ class DatePickerField extends Component {
                     endDate={this.props.endDate}
                     selected={ this.props.selected } 
                     onChange={value => this.props.data.onChange(value) }
+                    showMonthDropdown 
+                    showYearDropdown 
+                    dropdownMode="select"
                 />
                 {this.props.data.touched && this.props.data.error && <span className="help-block help-block-error">{this.props.data.error}</span>}
             </div>           

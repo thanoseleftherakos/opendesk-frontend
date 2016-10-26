@@ -6,7 +6,7 @@ import Portlet from './portlet/';
 import Loader from './../UI/loader';
 import ReservationsTable from './../UI/reservations_table';
 import ReactHighcharts from 'react-highcharts';
-import Chart from './../UI/chart';
+import LineChart from './../UI/linechart';
 import moment from "moment";
 import DatePicker from 'react-datepicker';
 import { I18n } from 'react-redux-i18n';
@@ -45,7 +45,7 @@ class Dashboard extends Component {
                     <div className="topDashboard row">
                         <div className="col-md-6">
                             <h3 className="page-title">{this.props.dashboard.hotel.name} 
-                                <small> dashboard & statistics for </small> 
+                                <small> dashboard & statistics </small> 
                             </h3>
                         </div>
                         <div className="col-md-6">
@@ -82,7 +82,7 @@ class Dashboard extends Component {
                     </div>
                      <div className="row">
                         <div className="col-md-12">
-                            <Chart config={this.props.dashboard.chart} chartTitle={moment(this.state.startDate).format('MMMM')} yaxis="Rooms" />
+                            <LineChart config={this.props.dashboard.chart} chartTitle={moment(this.state.startDate).format('MMMM')} yaxis="Rooms" />
                         </div>
                     </div>
                     

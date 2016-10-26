@@ -16,5 +16,5 @@ export const ROOM_TYPES = 'room_types';
 export const FETCH_SETTINGS = 'hotel_settings';
 export const UPDATE_SETTINGS = 'update_hotel_settings';
 export const INIT = 'initialize_app';
-
+export const FETCH_STATS = 'fetch_stats'
 export const FETCH_USER_PROFILE = 'user_profile';
