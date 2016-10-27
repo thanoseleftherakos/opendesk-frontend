@@ -1,12 +1,12 @@
 ![opendesk logo](http://dev.webf8.net/opendesk_logo_blue.png)
 # opendesk - open source hotel reservation manager
 opendesk is build using react and redux using [opendesk-api](https://github.com/thanoseleftherakos/opendesk-api)
-
+![opendesk](http://dev.webf8.net/opendesk_dashboard.jpg)
 ###Online demo:
-[opendesk.online](https://opendesk.online)
+[opendesk.online](http://opendesk.online)
 ```bash
-username: demo
-password: demo
+username: demo@demo.com
+password: 123456
 ```
 
 ##Installation
@@ -36,3 +36,8 @@ To use webpack dev server & watch,
 ```
 
 Listens at **http://localhost:8080**
+
+
+### License
+
+[MIT license](http://opensource.org/licenses/MIT)
