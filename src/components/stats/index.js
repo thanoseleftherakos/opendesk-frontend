@@ -24,7 +24,7 @@ class Stats extends Component {
     renderStats() {
         if(this.props.statistics){
             return (
-                <PieChart chartTitle={I18n.t('general.statistics_countries')} config={this.props.statistics.countries}/>
+                <PieChart chartTitle={I18n.t('general.countries')} config={this.props.statistics.countries}/>
             );
         }
     }
@@ -32,9 +32,6 @@ class Stats extends Component {
 
 	render() {
 		const { handleSubmit, fields: { from_date, to_date } } = this.props;
-        // if(!this.props.room_types) {
-        //     return <Loader /> 
-        // }
 
 		return(
 			<div>
@@ -83,7 +80,7 @@ function validate(formProps) {
     let to_date = moment(formProps.to_date);
     let from_date = moment(formProps.from_date);
     if(to_date <= from_date) {
-        errors.to_date = 'Checkout must be after checkout';
+        errors.to_date = I18n.t('general.must_be_after_from');
     }
 
 

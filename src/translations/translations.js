@@ -146,7 +146,9 @@ module.exports = {
       settings: 'Ρυθμίσεις',
       edit_hotel: 'Επεξεργασία στοιχείων',
       language: 'Γλωσσα',
-      statistics: 'Στατιστικά'
+      statistics: 'Στατιστικά',
+      view: 'ΠΡΟΒΟΛΗ',
+      countries: 'Χώρες'
       
 
     },
